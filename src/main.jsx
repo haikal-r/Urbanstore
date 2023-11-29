@@ -11,7 +11,7 @@ import ProductPage from "./pages/products";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <div>helloworld</div>,
+        element: <div><h1>helloworld</h1></div>,
         errorElement: <ErrorPage />
     },
     {

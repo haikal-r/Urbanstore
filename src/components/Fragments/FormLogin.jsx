@@ -1,22 +1,41 @@
 import InputForm from "../Elements/Input";
 import Button from "../Elements/Buttons";
+import { login } from "../../services/auth.service";
 
 const FormLogin = () => {
+    const handleLogin = (event) => {
+        event.preventDefault();
+        // localStorage.setItem('email', event.target.email.value)
+        // localStorage.setItem('password', event.target.password.value)
+        // window.location.href = '/products'
+        const data = {
+            username: event.target.username.value,
+            password: event.target.password.value,
+        }
+        login(data, (status, res) => {
+            if(status) {
+                localStorage.setItem("token", res)
+            }else {
+                console.log(res)
+            }
+        })
+    }
+
     return(
-        <form action="">
+        <form onSubmit={handleLogin}>
           <InputForm
-            label="Email"
-            type="email"
-            placeholder="example@gmail.com"
-            name="email"
+            label="Username"
+            type="text"
+            placeholder="jhon doe"
+            name="username"
           />
           <InputForm
-            label="Password"
+            label="password"
             type="password"
             placeholder="******"
             name="password"
           />
-          <Button classname="bg-blue-600 w-full mb-2">Login</Button>
+          <Button classname="bg-blue-600 w-full mb-2" type="submit">Login</Button>
         </form>
     )
 }
