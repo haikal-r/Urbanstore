@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { getProducts } from "../services/product.service";
 import { Fragment, useState, useEffect } from "react";
 
-
 const CartPage = () => {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
