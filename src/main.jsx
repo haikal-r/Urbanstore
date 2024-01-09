@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import LoginPage from "./pages/login";
+import SignInPage from "./pages/sign-in";
 import RegisterPage from "./pages/register";
 import ErrorPage from "./pages/404";
 import ProductPage from "./pages/products";
@@ -20,8 +20,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/login",
-    element: <LoginPage />,
+    path: "/sign-in",
+    element: <SignInPage />,
   },
   {
     path: "/register",

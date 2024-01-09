@@ -6,7 +6,6 @@ import { useLogin } from "../hooks/useLogin";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
-  useLogin();
 
   useEffect(() => {
     getProducts((data) => {
