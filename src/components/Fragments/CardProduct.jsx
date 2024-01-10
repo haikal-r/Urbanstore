@@ -7,7 +7,7 @@ import { Icon } from "@iconify/react"
 const CardProduct = (props) => {
     const { children } = props
     return(
-        <div className="w-full max-w-xs bg-white border rounded-xl hover:shadow-xl">
+        <div className="w-full max-w-72 h-full bg-white border rounded-2xl shadow-lg hover:shadow-xl">
         {children}
       </div>
     )
