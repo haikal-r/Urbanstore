@@ -9,6 +9,10 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    fontFamily: {
+        'display': ['Oswald'],
+        'body': ['"Poppins"'],
+      },
     container: {
       center: true,
       padding: "2rem",

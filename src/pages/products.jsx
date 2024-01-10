@@ -21,11 +21,9 @@ const ProductPage = () => {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {products.length > 0 &&
               products.map((product) => (
-                <CardProduct>
-                  <CardProduct.Header images={product.image} id={product.id} />
-                  <CardProduct.Body name={product.title}>
-                    {product.description}
-                  </CardProduct.Body>
+                <CardProduct id={product.id} >
+                  <CardProduct.Header images={product.image}  />
+                  <CardProduct.Body name={product.title} category={product.category} />
                   <CardProduct.Footer price={product.price} id={product.id} />
                 </CardProduct>
               ))}

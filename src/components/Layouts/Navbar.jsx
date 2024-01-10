@@ -9,7 +9,7 @@ import SignUpButton from "../Elements/Buttons/SignupButton";
 const Navbar = () => {
     const user = useLogin()
   return (
-    <nav className="sticky top-0 bg-white flex justify-between items-center  h-16 px-5 border-b text-base text-black font-normal mb-4 w-full">
+    <nav className="sticky top-0 z-50 bg-white flex justify-between items-center  h-16 px-5 border-b text-base text-black font-normal mb-4 w-full">
       <div className="text-2xl font-bold  ">
         <Link to="/">Next JS</Link>
       </div>
