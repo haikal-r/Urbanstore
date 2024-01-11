@@ -1,21 +1,30 @@
-import Button from "."
-import { Icon } from "@iconify/react"
+import Button from ".";
+import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const CartButton = () => {
-    const cart = useSelector((state) => state.cart.data.length);
-    const navigate = useNavigate();
+  const [totalCart, setTotalCart] = useState(0);
+  const cart = useSelector((state) => state.cart.data);
+  const navigate = useNavigate();
 
-    return(
-        <Button
-        onClick={() => navigate("/cart")}
-        classname="flex justify-between items-center gap-1"
-      >
-        <Icon icon="f7:cart" width={20} />
-        <p className="text-sm">{cart}</p>
-      </Button>
-    )
-}
+  useEffect(() => {
+    const sum = cart.reduce((acc, item) => {
+      return acc + item.qty;
+    }, 0);
+    setTotalCart(sum);
+  }, [cart]);
+
+  return (
+    <Button
+      onClick={() => navigate("/cart")}
+      classname="flex justify-between items-center gap-1"
+    >
+      <ShoppingCart width={17} />
+      <p className="text-sm">{totalCart}</p>
+    </Button>
+  );
+};
 
 export default CartButton;

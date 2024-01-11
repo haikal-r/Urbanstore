@@ -2,7 +2,6 @@ import { Fragment, useState, useEffect } from "react";
 import CardProduct from "../components/Fragments/CardProduct";
 import { getProducts } from "../services/product.service";
 import Navbar from "../components/Layouts/Navbar";
-import { useLogin } from "../hooks/useLogin";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);

@@ -4,7 +4,7 @@ import Button from "."
 const SignUpButton = () => {
     return(
         <Link to="/sign-in">
-         <Button>Sign Up</Button>
+         <Button classname="bg-emerald-600 text-white font-medium border-0 hover:bg-emerald-600">Sign In</Button>
         </Link>
     )
 }

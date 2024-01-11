@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import toast  from "react-hot-toast";
 
 const cartSlice = createSlice({
     name: "cart",
@@ -11,9 +12,10 @@ const cartSlice = createSlice({
                 (item) => item.id === action.payload.id
             )
             if (itemInCart){
-                itemInCart.qty++
+                toast('Item allready in cart.')
             }else{
                 state.data.push(action.payload)
+                toast.success('Item added to cart.')
             }
         },
     },

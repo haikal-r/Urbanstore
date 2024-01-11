@@ -1,19 +1,16 @@
 import { Link } from "react-router-dom";
-import Button from "../Elements/Buttons";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/slices/cartSlice";
-import { Icon } from "@iconify/react";
 import { ShoppingCart } from "lucide-react";
 import IconButton from "../ui/iconButton";
 
 const CardProduct = (props) => {
   const { children, id } = props;
+
   return (
-    <Link to={`/product/${id}`} className="group flex justify-center">
-      <div className="w-full max-w-80 h-full space-y-4 bg-white border rounded-2xl shadow-lg hover:shadow-2xl duration-300 transition-all">
-        {children}
-      </div>
-    </Link>
+    <div className="group/card w-full max-w-80 h-full space-y-4 bg-white border rounded-2xl shadow-lg hover:shadow-2xl duration-300 transition-all">
+      <Link to={`/product/${id}`}>{children}</Link>
+    </div>
   );
 };
 
@@ -46,6 +43,7 @@ const Body = (props) => {
 const Footer = (props) => {
   const { price, id } = props;
   const dispatch = useDispatch();
+
   return (
     <div className="flex justify-between items-center px-5 pb-5">
       <h1 className="text-xl text-emerald-800 font-semibold">
@@ -56,6 +54,7 @@ const Footer = (props) => {
         <IconButton
           aria-label="add-to-cart"
           className="bg-emerald-50 group-hover/icon:bg-emerald-500"
+          onClick={(e) => e.preventDefault() || dispatch(addToCart({ id, qty: 1 }))}
           icon={
             <ShoppingCart
               size={20}
