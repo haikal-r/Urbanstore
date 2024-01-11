@@ -19,7 +19,7 @@ const CartButton = () => {
   return (
     <Button
       onClick={() => navigate("/cart")}
-      classname="flex justify-between items-center gap-1"
+      classname="flex justify-between items-center gap-1 hover:bg-slate-100"
     >
       <ShoppingCart width={17} />
       <p className="text-sm">{totalCart}</p>

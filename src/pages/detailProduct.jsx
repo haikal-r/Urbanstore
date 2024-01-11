@@ -18,10 +18,13 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Fragment } from "react";
 import Navbar from "@/components/Layouts/Navbar";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/slices/cartSlice";
 
 const DetailProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const dispatch = useDispatch()
 
   useEffect(() => {
     getDetailProduct(id, (data) => {
@@ -39,7 +42,7 @@ const DetailProductPage = () => {
               <img
                 src={product.image}
                 alt={product.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-fill"
                 loading="lazy"
               />
             </div>
@@ -126,8 +129,9 @@ const DetailProductPage = () => {
                   <button
                     className="h-10 px-6 font-semibold rounded-lg border border-slate-200 text-slate-900"
                     type="button"
+                    onClick={() => dispatch(addToCart({ id, qty:1 }))}
                   >
-                    Add to bag
+                    Add to cart
                   </button>
                 </div>
                 <button

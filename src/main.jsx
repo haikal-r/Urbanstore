@@ -4,7 +4,7 @@ import App from "./App";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignInPage from "./pages/sign-in";
-import RegisterPage from "./pages/register";
+import RegisterPage from "./pages/sign-up";
 import ErrorPage from "./pages/404";
 import ProductPage from "./pages/products";
 import ProfilePage from "./pages/profile";
