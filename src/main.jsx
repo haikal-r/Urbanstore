@@ -13,6 +13,7 @@ import DetailProductPage from "./pages/detailProduct";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Toaster } from "react-hot-toast";
+import SignUpPage from "./pages/sign-up";
 
 const router = createBrowserRouter([
   {
@@ -25,8 +26,8 @@ const router = createBrowserRouter([
     element: <SignInPage />,
   },
   {
-    path: "/register",
-    element: <RegisterPage />,
+    path: "/sign-up",
+    element: <SignUpPage />,
   },
   {
     path: "/products",
