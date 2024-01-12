@@ -14,6 +14,10 @@ import {
   } from "@/components/ui/dropdown-menu"
 import { useLogin } from "@/hooks/useLogin";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { LayoutDashboard, LogOut, User as UserIcon } from 'lucide-react'
+import { Link } from "react-router-dom";
+
 
 const UserAccountNav = () => {
     
@@ -27,57 +31,44 @@ const UserAccountNav = () => {
     return(
         <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="">{username}</Button>
+        <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuContent className="w-56" align="end">
+          <div className="flex justify-start p-2 gap-2">
+            <div className="flex flex-col space-y-1 leading-none">
+                {username && <p className="text-sm font-medium">{username}</p>}
+                <p className='w-[200px] truncate text-xs text-muted-foreground'>
+                Anonymus
+              </p>
+            </div>
+          </div>
+
           <DropdownMenuSeparator />
+          
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              Profile
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Settings
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Keyboard shortcuts
-              <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>Team</DropdownMenuItem>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent>
-                  <DropdownMenuItem>Email</DropdownMenuItem>
-                  <DropdownMenuItem>Message</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>More...</DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-            <DropdownMenuItem>
-              New Team
-              <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>GitHub</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
-          <DropdownMenuItem disabled>API</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={handleLogout}>
-            Log out
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          <DropdownMenuItem asChild disabled>
+            <Link href='/dashboard/account'>
+              <UserIcon className='mr-2 h-4 w-4' aria-hidden='true' />
+              Account
+            </Link>
           </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link href='/dashboard/stores'>
+              <LayoutDashboard className='mr-2 h-4 w-4' aria-hidden='true' />
+              My Dashboard
+            </Link>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleLogout} asChild>
+          <div>
+            <LogOut className='mr-2 h-4 w-4' aria-hidden='true' />
+            Sign out
+          </div>
+        </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     )

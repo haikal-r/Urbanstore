@@ -11,7 +11,7 @@ const Navbar = () => {
     const user = useLogin()
   return (
     <nav className="sticky top-0 z-50 bg-white flex justify-between items-center  h-16 px-6 border-b text-sm text-black font-normal w-full">
-      <div className="text-lg font-bold ">
+      <div className="text-base font-bold ">
         <Link to="/" className="flex items-center gap-2">
             <Landmark />
             UrbanShop
