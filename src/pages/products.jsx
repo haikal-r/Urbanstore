@@ -2,9 +2,18 @@ import { Fragment, useState, useEffect } from "react";
 import CardProduct from "../components/Fragments/CardProduct";
 import { getProducts } from "../services/product.service";
 import Navbar from "../components/Layouts/Navbar";
+import { getUsers } from "@/services/auth.service";
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
+
+//   useEffect(() => {
+//     getUsers((data) => {
+//         data.map((user) => (
+//             console.log(user.email)
+//     ))
+//     })
+//   }, []);
 
   useEffect(() => {
     getProducts((data) => {

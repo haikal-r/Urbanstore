@@ -21,7 +21,7 @@ import { Link } from "react-router-dom";
 
 const UserAccountNav = () => {
     
-    const username = useLogin()
+    const user = useLogin()
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("password");
@@ -39,10 +39,8 @@ const UserAccountNav = () => {
         <DropdownMenuContent className="w-56" align="end">
           <div className="flex justify-start p-2 gap-2">
             <div className="flex flex-col space-y-1 leading-none">
-                {username && <p className="text-sm font-medium">{username}</p>}
-                <p className='w-[200px] truncate text-xs text-muted-foreground'>
-                Anonymus
-              </p>
+                {user && <p className="text-sm font-medium">{user.username}</p> }
+                {user && <p className='w-[200px] truncate text-xs text-muted-foreground'>{user.email}</p>}
             </div>
           </div>
 

@@ -8,7 +8,7 @@ const CardProduct = (props) => {
   const { children, id } = props;
 
   return (
-    <div className="group w-full max-w-80 h-full space-y-4 bg-white border rounded-2xl shadow-lg hover:shadow-2xl duration-300 transition-all">
+    <div className="group w-full h-full space-y-4 bg-white border rounded-2xl shadow-lg hover:shadow-2xl duration-300 transition-all">
       <Link to={`/product/${id}`}>{children}</Link>
     </div>
   );

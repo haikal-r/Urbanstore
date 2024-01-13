@@ -14,3 +14,25 @@ export const getUsername = (token) => {
     const decoded = jwtDecode(token)
     return decoded.user
 }
+
+export const getUsers = ( callback) => {
+    axios
+    .get(`https://fakestoreapi.com/users`)
+    .then((res) => {
+        callback(res.data)
+    })
+    .catch((err) => {
+        callback(err)
+    })
+}
+
+export const getDetailUsers = (id, callback) => {
+    axios
+    .get(`https://fakestoreapi.com/users/${id}`)
+    .then((res) => {
+        callback(res.data)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}

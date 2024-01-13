@@ -28,7 +28,12 @@ const CartPage = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className="w-2/5">
+      <div className="w-full">
+      <div className="max-w-7xl mx-auto">
+        <section className="px-4 sm:px-6 py-8">
+        </section>
+    </div>
+    
         <h1 className="font-bold text-2xl">Cart</h1>
         <table className="table-auto text-left border-separate border-spacing-x-5">
           <thead>

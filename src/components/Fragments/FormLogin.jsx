@@ -50,7 +50,7 @@ const FormLogin = () => {
                     />
                 </CardContent>
                 <CardFooter className="flex flex-wrap justify-between items-center gap-2">
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-sm text-muted-foreground sm:w-[60%]">
                         <span className="inline-block mr-1">Don't have an account?</span>
                         <Link
                         aria-label='Sign up'
