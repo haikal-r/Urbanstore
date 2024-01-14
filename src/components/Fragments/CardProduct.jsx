@@ -54,7 +54,7 @@ const Footer = (props) => {
         <IconButton
           aria-label="add-to-cart"
           className="bg-emerald-50 group-hover/icon:bg-emerald-500"
-          onClick={(e) => e.preventDefault() || dispatch(addToCart({ id, qty: 1 }))}
+          onClick={(e) => e.preventDefault() || dispatch(addToCart({ id: id, qty: 1 }))}
           icon={
             <ShoppingCart
               size={20}

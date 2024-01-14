@@ -2,6 +2,7 @@ import Navbar from "../components/Layouts/Navbar";
 import { useSelector } from "react-redux";
 import { getProducts } from "../services/product.service";
 import { Fragment, useState, useEffect } from "react";
+import CartItem from "@/components/Fragments/CartItem";
 
 const CartPage = () => {
   const [products, setProducts] = useState([]);
@@ -28,63 +29,24 @@ const CartPage = () => {
   return (
     <Fragment>
       <Navbar />
-      <div className="w-full">
       <div className="max-w-7xl mx-auto">
-        <section className="px-4 sm:px-6 py-8">
-        </section>
-    </div>
-    
-        <h1 className="font-bold text-2xl">Cart</h1>
-        <table className="table-auto text-left border-separate border-spacing-x-5">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.length > 0 &&
-              cart.map((item) => {
-                const product = products.find(
-                  (product) => product.id === item.id
-                );
-                return (
-                  <tr key={item.id}>
-                    <td>{product.title}</td>
-                    <td>
-                      ${" "}
-                      {product.price.toLocaleString("id-ID", {
-                        styles: "currency",
-                        currency: "USD",
-                      })}
-                    </td>
-                    <td>{item.qty}</td>
-                    <td>
-                      ${" "}
-                      {(item.qty * product.price).toLocaleString("id-ID", {
-                        styles: "currency",
-                        currency: "USD",
-                      })}
-                    </td>
-                  </tr>
-                );
-              })}
-            <tr>
-              <td colSpan={3}>
-                <b>Total Price</b>
-              </td>
-              <td>
-                ${" "}
-                {totalPrice.toLocaleString("id-ID", {
-                  styles: "currency",
-                  currency: "USD",
+      <section className="px-4 sm:px-6 py-16">
+        <h1 className="font-bold text-3xl">Shopping Cart</h1>
+        <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
+            <div className="lg:col-span-7">
+                <ul>
+                {products.length > 0 &&
+                    cart.map((item) => {
+                    const product = products.find((product) => product.id === item.id);
+                    console.log(product)
+                        return (
+                            <CartItem key={product.id} data={product} />
+                        );
                 })}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </ul>
+            </div>
+        </div>
+        </section>
       </div>
     </Fragment>
   );
