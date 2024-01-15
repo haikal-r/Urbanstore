@@ -1,28 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getDetailProduct } from "../services/product.service";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Fragment } from "react";
 import Navbar from "@/components/Layouts/Navbar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/redux/slices/cartSlice";
+import Button from "@/components/Elements/Buttons";
 
 const DetailProductPage = () => {
-  const { id } = useParams();
+  const { id } = useParams()
+  const parsedId = parseInt(id)
   const [product, setProduct] = useState({});
   const dispatch = useDispatch()
 
@@ -46,7 +33,7 @@ const DetailProductPage = () => {
                 loading="lazy"
               />
             </div>
-            <form className="flex-auto p-6">
+            <div className="flex-auto p-6">
               <div className="flex flex-wrap">
                 <h1 className="flex-auto text-lg font-semibold text-slate-900">
                   {product.title}
@@ -129,7 +116,7 @@ const DetailProductPage = () => {
                   <button
                     className="h-10 px-6 font-semibold rounded-lg border border-slate-200 text-slate-900"
                     type="button"
-                    onClick={() => dispatch(addToCart({ id, qty:1 }))}
+                    onClick={() => dispatch(addToCart({ id: parsedId, qty:1 }))}
                   >
                     Add to cart
                   </button>
@@ -154,7 +141,7 @@ const DetailProductPage = () => {
                 </button>
               </div>
               <p className="text-sm text-slate-700">{product.description}</p>
-            </form>
+            </div>
           </div>
         )}
       </div>

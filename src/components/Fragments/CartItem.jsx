@@ -3,14 +3,13 @@ import IconButton from "../ui/iconButton"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux";
-import { removeItem, addToCart } from "../../redux/slices/cartSlice";
+import { removeItem } from "../../redux/slices/cartSlice";
 
 
 const CartItem = ({ data }) => {
-  const cart = useSelector((state) => state.data)
   const dispatch = useDispatch();
   const onRemove = () => {
-    dispatch(removeItem({id: data.id, qty: 1}))
+    dispatch(removeItem(data.id))
     console.log("berhasil")
   }
 

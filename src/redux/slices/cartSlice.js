@@ -16,15 +16,16 @@ const cartSlice = createSlice({
             }else{
                 state.data.push(action.payload)
                 toast.success('Item added to cart.')
+                localStorage.setItem('cart', JSON.stringify(state.data))
             }
         },
         removeItem: (state, action) => {
+          state.data = state.data.filter(item => item.id !== action.payload);
           toast.success('Item removed from the cart')
-          
-          ;
-      }
+    }
     },
 })
+
 
 export const { addToCart, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
