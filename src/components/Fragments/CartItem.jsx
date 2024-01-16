@@ -22,7 +22,7 @@ const CartItem = ({ data }) => {
               <div className="absolute z-10 right-0 top-0">
                 <IconButton onClick={onRemove} icon={<X size={15} />} />
               </div>
-              <div className="relative pr-9 sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
+              <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
                 <div className="flex justify-between">
                   <Link
                     to="/"
@@ -31,11 +31,14 @@ const CartItem = ({ data }) => {
                   {data.title}
                   </Link>
                 </div>
+
                 <div className="mt-1 text-sm">
                   <p className="text-gray-500 sm:text-center capitalize">
                     {data.category}
                   </p>
                 </div>
+
+                {data.price}
               </div>
             </div>
         </li>

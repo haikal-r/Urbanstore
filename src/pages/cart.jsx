@@ -8,7 +8,6 @@ const CartPage = () => {
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const cart = useSelector((state) => state.cart.data);
-  console.log(cart)
 
   useEffect(() => {
     getProducts((data) => {
@@ -39,8 +38,6 @@ const CartPage = () => {
                 {products.length > 0 &&
                     cart.map((item) => {
                       const product = products.find((product) => product.id === item.id);
-                      console.log(item.id)
-                      console.log(product.id)
                         return (
                             <CartItem key={product.id} data={product} />
                         );
