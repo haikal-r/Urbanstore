@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getProducts } from "../services/product.service";
 import { Fragment, useState, useEffect } from "react";
 import CartItem from "@/components/Fragments/CartItem";
+import Footer from "@/components/Layouts/Footer";
 
 const CartPage = () => {
   const [products, setProducts] = useState([]);
@@ -30,7 +31,7 @@ const CartPage = () => {
     <Fragment>
       <Navbar />
       <div className="max-w-7xl mx-auto">
-      <section className="px-4 sm:px-6 py-16">
+      <section className="px-4 sm:px-6 py-10">
         <h1 className="font-bold text-3xl">Shopping Cart</h1>
         <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
             <div className="lg:col-span-7">
@@ -47,6 +48,7 @@ const CartPage = () => {
         </div>
         </section>
       </div>
+      <Footer />
     </Fragment>
   );
 };

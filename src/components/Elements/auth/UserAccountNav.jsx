@@ -47,14 +47,14 @@ const UserAccountNav = () => {
           <DropdownMenuSeparator />
           
           <DropdownMenuGroup>
-          <DropdownMenuItem asChild disabled>
-            <Link href='/dashboard/account'>
+          <DropdownMenuItem asChild>
+            <Link to='/profile'>
               <UserIcon className='mr-2 h-4 w-4' aria-hidden='true' />
-              Account
+              Profile
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href='/dashboard/stores'>
+            <Link to='/dashboard/stores'>
               <LayoutDashboard className='mr-2 h-4 w-4' aria-hidden='true' />
               My Dashboard
             </Link>

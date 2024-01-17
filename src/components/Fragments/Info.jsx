@@ -1,4 +1,13 @@
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addToCart } from "../../redux/slices/cartSlice";
+
+
 const Info = ({ product }) => {
+  const { id } = useParams()
+  const parsedId = parseInt(id)
+  const dispatch = useDispatch()
+
   return(
     <form className="flex-auto p-6">
       <div className="flex flex-wrap">
@@ -6,7 +15,7 @@ const Info = ({ product }) => {
           {product.title}
         </h1>
         <div className="text-lg font-semibold text-slate-500">
-          {product.price}
+          ${product.price}
         </div>
         <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
           Review {product.rating.rate}/5
@@ -83,7 +92,7 @@ const Info = ({ product }) => {
           <button
             className="h-10 px-6 font-semibold rounded-lg border border-slate-200 text-slate-900"
             type="button"
-            onClick={() => dispatch(addToCart({ id, qty:1 }))}
+            onClick={() => dispatch(addToCart({ id: parsedId, qty:1 }))}
           >
             Add to cart
           </button>
