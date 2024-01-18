@@ -7,7 +7,7 @@ export const getProducts = (callback) => {
         callback(res.data)
     })
     .catch((err) => {
-        console.log(err)
+        callback(err)
     })
 }
 
@@ -18,6 +18,6 @@ export const getDetailProduct = (id, callback) => {
         callback(res.data)
     })
     .catch((err) => {
-        console.log(err)
+        callback(err)
     })
 }

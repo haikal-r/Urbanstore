@@ -6,6 +6,7 @@ import { useLogin } from "@/hooks/useLogin";
 import SignInButton from "../Elements/Buttons/SignInButton";
 import { Landmark } from "lucide-react";
 import { useEffect } from "react";
+import DesktopNavbar from "./DesktopNavbar";
 
 
 const Navbar = () => {
@@ -13,10 +14,8 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white flex justify-between items-center h-16 px-4 md:px-6 border-b text-sm text-black font-normal w-full">
       <div className="text-base font-bold ">
-        <Link to="/" className="flex items-center gap-1 md:gap-2">
-            <Landmark />
-            UrbanShop
-        </Link>
+        <DesktopNavbar />
+        
       </div>
       <div className=" flex justify-end items-center gap-2">
         <SearchButton />
