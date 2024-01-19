@@ -7,16 +7,19 @@ import SignInButton from "../Elements/Buttons/SignInButton";
 import { Landmark } from "lucide-react";
 import { useEffect } from "react";
 import DesktopNavbar from "./DesktopNavbar";
+import MobileNavbar from "./MobileNavbar";
 
 
 const Navbar = () => {
     const user = useLogin()
   return (
     <nav className="sticky top-0 z-50 bg-white flex justify-between items-center h-16 px-4 md:px-6 border-b text-sm text-black font-normal w-full">
+      {/* Left */}
       <div className="text-base font-bold ">
         <DesktopNavbar />
-        
+        <MobileNavbar />
       </div>
+      {/* Right */}
       <div className=" flex justify-end items-center gap-2">
         <SearchButton />
         <CartButton />
