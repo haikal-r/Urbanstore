@@ -1,33 +1,42 @@
 import { Fragment, useState, useEffect } from "react";
-import CardProduct from "../components/Fragments/CardProduct";
-import { getProducts } from "../services/product.service";
 import Navbar from "../components/Layouts/Navbar";
 import Footer from "@/components/Layouts/Footer";
+import { getCategory } from "@/services/category.service";
+import ProductList from "@/components/Layouts/ProductList";
+import { useParams } from "react-router-dom";
+import { getProducts } from "@/services/product.service";
 
 const ProductPage = () => {
-  const [products, setProducts] = useState([]);
+  const { item } = useParams()
+  const [category, setCategory] = useState([]);
+  const [products, setProducts] = useState([])
+  let data
+  
+  if(item){
+    data = category
+  }else{
+    data = products
+  }
 
   useEffect(() => {
-    getProducts((data) => {
+    getProducts( data => {
       setProducts(data);
     });
   }, []);
+
+  useEffect(() => {
+    getCategory(item, (data) => {
+      setCategory(data);
+    });
+  }, [item]);
 
   return (
     <Fragment>
       <Navbar />
       <div className="max-w-7xl mx-auto">
         <section className="px-4 sm:px-6 py-8">
-          <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {products.length > 0 &&
-              products.map((product, index) => (
-                <CardProduct id={product.id} key={index}>
-                  <CardProduct.Header images={product.image}  />
-                  <CardProduct.Body name={product.title} category={product.category} />
-                  <CardProduct.Footer price={product.price} id={product.id} />
-                </CardProduct>
-              ))}
-          </div>
+          
+          <ProductList products={data} />
         </section>
       </div>
       <Footer />
