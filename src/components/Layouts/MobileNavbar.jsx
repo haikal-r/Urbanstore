@@ -2,9 +2,6 @@ import { Menu, Landmark } from "lucide-react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
@@ -14,11 +11,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const MobileNavbar = () => {
+  const[isOpen, setIsOpen] = useState(false)
+
   return (
     <div className="flex sm:hidden">
-      <Sheet>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger>
           <Menu />
         </SheetTrigger>
@@ -32,7 +32,10 @@ const MobileNavbar = () => {
               UrbanStore
             </Link>
             <div className="text-sm">
-              <Accordion type="single" collapsible>
+              <Accordion 
+                type='multiple'
+                defaultValue={['item-1', 'item-2', 'item-3']}
+                className='w-full'>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>My Dashboard</AccordionTrigger>
                   <AccordionContent>

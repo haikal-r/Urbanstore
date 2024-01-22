@@ -9,18 +9,18 @@ import { getProducts } from "@/services/product.service";
 const ProductPage = () => {
   const { item } = useParams()
   const [category, setCategory] = useState([]);
-  const [products, setProducts] = useState([])
-  let data
+  const [initialProducts, setInitialProducts] = useState([])
+  let filteredProduct
   
   if(item){
-    data = category
+    filteredProduct = category
   }else{
-    data = products
+    filteredProduct = initialProducts
   }
 
   useEffect(() => {
     getProducts( data => {
-      setProducts(data);
+      setInitialProducts(data);
     });
   }, []);
 
@@ -36,7 +36,7 @@ const ProductPage = () => {
       <div className="max-w-7xl mx-auto">
         <section className="px-4 sm:px-6 py-8">
           
-          <ProductList products={data} />
+          <ProductList products={filteredProduct} />
         </section>
       </div>
       <Footer />
