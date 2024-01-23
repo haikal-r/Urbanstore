@@ -12,6 +12,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { Toaster } from "react-hot-toast";
 import SignUpPage from "./pages/sign-up";
+import '@mantine/core/styles.css';
 
 const router = createBrowserRouter([
   {

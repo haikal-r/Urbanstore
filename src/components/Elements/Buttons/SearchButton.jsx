@@ -1,31 +1,26 @@
 import Button from "."
 import { Icon } from "@iconify/react"
 import {
-  Command,
   CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command"
-import { Fragment, useEffect, useState, useTransition } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { getProducts } from "@/services/product.service"
 
 const SearchButton = () => {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [data, setData] = useState([])
-  const [isPending, startTransition] = useTransition()
+  const category = Array.from(new Set(data.map((product => product.category))));
 
   useEffect(() => {
-    // const fetchProduct = () => {
-    // }
-    getProducts(data => setData(data))
-
-    // startTransition(fetchProduct)
+    getProducts(data => {
+      setData(data)
+    })
   }, [])
 
   useEffect(() => {
@@ -42,21 +37,35 @@ const SearchButton = () => {
         <Icon icon="iconoir:search" width={20} />
         <p className="font-medium hidden sm:block">Search products...</p>
         </Button>
+        
         <CommandDialog open={open} onOpenChange={setOpen}>
           <CommandInput 
             value={query}
             onValueChange={setQuery}
             placeholder="Type a command or search..." 
           />
+          <CommandEmpty
+            className={query == '' ? 'hidden' : 'py-6 text-center text-sm'}
+          >
+            No results found.
+          </CommandEmpty>
+          {query == ''  ? (
+            <div>
+              
+            </div>
+          ) : (
           <CommandList>
-            {data.map((index, product) => {
-            <CommandGroup heading={product.category} key={product.category}>
-              <CommandItem key={index} value={product.title}>
-                <span>{product.title}</span>
-              </CommandItem>
-            </CommandGroup>
-            })}
+            {category.map((category) => (
+              <CommandGroup key={category} heading={category}>
+                {data
+                .filter(product => product.category === category)
+                .map(product => (
+                  <CommandItem key={product.id}>{product.title}</CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
           </CommandList>
+          )}
         </CommandDialog>
       </Fragment>
 
