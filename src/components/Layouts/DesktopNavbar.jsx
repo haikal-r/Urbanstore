@@ -11,7 +11,7 @@ import { ListItem } from "./ListItem";
 
 const DesktopNavbar = () => {
   return (
-    <div className="hidden sm:flex gap-x-4 items-center">
+    <div className="hidden md:flex gap-x-4 items-center">
       <Link to="/" className="flex items-center gap-1 md:gap-2">
         <Landmark width={21} />
         UrbanStore

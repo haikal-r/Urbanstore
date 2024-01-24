@@ -17,7 +17,7 @@ const MobileNavbar = () => {
   const[isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="flex sm:hidden">
+    <div className="flex md:hidden">
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger>
           <Menu />
