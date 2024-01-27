@@ -25,7 +25,7 @@ const UserAccountNav = () => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("password");
-        window.location.href = "/products";
+        window.location.href = "/";
       };
 
     return(

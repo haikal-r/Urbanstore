@@ -1,4 +1,3 @@
-import Button from "."
 import { Icon } from "@iconify/react"
 import {
   CommandDialog,
@@ -11,6 +10,7 @@ import {
 import { Fragment, useEffect, useState, useCallback } from "react"
 import { getProducts } from "@/services/product.service"
 import { useNavigate } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
 const SearchButton = () => {
   const [open, setOpen] = useState(false)
@@ -50,10 +50,17 @@ const SearchButton = () => {
     return(
       <Fragment>
         <Button 
+        variant='outline'
         onClick={() => setOpen(open => !open)}
-        classname="flex justify-between items-center gap-2 hover:bg-slate-100">
-        <Icon icon="iconoir:search" width={20} />
-        <p className="font-medium hidden md:block">Search products...</p>
+        className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 ">
+        <Icon icon="iconoir:search" width={17} className="xl:mr-2"  aria-hidden='true' />
+        <span className="font-medium hidden xl:inline-flex">Search products...</span>
+        <kbd className='pointer-events-none absolute z-10 right-2 top-2 hidden h-6 select-none items-center gap-1 rounded-full border bg-muted px-1.5 font-mono text-xs font-medium opacity-100 xl:flex'>
+          <abbr title='Control' className='no-underline'>
+            Ctrl
+          </abbr>
+          K
+        </kbd>
         </Button>
         <CommandDialog position="top" open={open} onOpenChange={setOpen}>
           <CommandInput 

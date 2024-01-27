@@ -1,4 +1,4 @@
-import Button from ".";
+import { Button } from "@/components/ui/button";
 import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -19,7 +19,9 @@ const CartButton = () => {
   return (
     <Button
       onClick={() => navigate("/cart")}
-      classname="flex justify-between items-center gap-1 hover:bg-slate-100"
+      variant="outline"
+      className="gap-1"
+      size="sm"
     >
       <ShoppingCart width={17} />
       <p className="text-sm">{totalCart}</p>

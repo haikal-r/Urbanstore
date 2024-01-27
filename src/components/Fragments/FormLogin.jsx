@@ -21,7 +21,7 @@ const FormLogin = () => {
         login(data, (status, res) => {
             if(status) {
                 localStorage.setItem("token", res)
-                window.location.href = '/products'
+                window.location.href = '/'
             }else {
                 console.log(res)
             }

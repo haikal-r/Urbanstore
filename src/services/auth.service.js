@@ -15,7 +15,7 @@ export const getUsername = (token) => {
     return decoded.user
 }
 
-export const getUsers = ( callback) => {
+export const getUsers = (callback) => {
     axios
     .get(`https://fakestoreapi.com/users`)
     .then((res) => {
