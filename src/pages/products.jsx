@@ -1,10 +1,12 @@
-import { Fragment, useState, useEffect } from "react";
+import { Fragment, useState, useEffect, Suspense, lazy } from "react";
 import Navbar from "../components/Layouts/Navbar";
 import Footer from "@/components/Layouts/Footer";
 import { getCategory } from "@/services/category.service";
-import ProductList from "@/components/Layouts/ProductList";
 import { useParams } from "react-router-dom";
 import { getProducts } from "@/services/product.service";
+import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
+
+const ProductList = lazy(() => import('@/components/Layouts/ProductList'));
 
 const ProductPage = () => {
   const { item } = useParams()
@@ -35,8 +37,14 @@ const ProductPage = () => {
       <Navbar />
       <div className="max-w-7xl mx-auto">
         <section className="px-4 sm:px-6 py-8">
-          
-          <ProductList products={filteredProduct} />
+        <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {filteredProduct.map((product) => (
+            <Suspense fallback={<ProductCardSkeleton />} key={product.id}>
+              <ProductList product={product}/>
+            </Suspense>
+          )
+          )}
+          </div>
         </section>
       </div>
       <Footer />
