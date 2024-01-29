@@ -1,13 +1,11 @@
 import CartButton from "../Elements/Buttons/CartButton";
 import SearchButton from "../Elements/Buttons/SearchButton";
-import { Link } from "react-router-dom";
 import UserAccountNav from "../Elements/auth/UserAccountNav";
 import { useLogin } from "@/hooks/useLogin";
 import SignInButton from "../Elements/Buttons/SignInButton";
-import { Landmark } from "lucide-react";
-import { useEffect } from "react";
 import DesktopNavbar from "./DesktopNavbar";
-import MobileNavbar from "./MobileNavbar";
+import MobileNavbar from "./MobileNavbar"
+import { Separator } from "@/components/ui/separator";
 
 
 const Navbar = () => {
@@ -20,11 +18,11 @@ const Navbar = () => {
         <MobileNavbar />
       </div>
       {/* Right */}
-      <div className=" flex justify-end items-center gap-2">
+      <div className="flex justify-end items-center gap-2 h-5">
         <SearchButton />
         <CartButton />
+        <Separator orientation="vertical" className='mx-2'/>
         { user.username ? <UserAccountNav /> : <SignInButton /> }
-        
       </div>
     </nav>
   );
