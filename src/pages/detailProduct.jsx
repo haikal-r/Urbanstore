@@ -33,7 +33,6 @@ const DetailProductPage = () => {
           </Fragment>
         }
         </div>
-        
       </div>
       <Footer />
     </Fragment>
