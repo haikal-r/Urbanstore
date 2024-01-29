@@ -17,9 +17,7 @@ const Gallery = ({ product }) => {
       </Tab.Panels>
       <div className='mt-6 w-full'>
         <Tab.List className='grid grid-cols-4 gap-6'>
-        
-        <GalleryTab product={product} />
-          
+          <GalleryTab product={product} />
         </Tab.List>
       </div>
       </Tab.Group>
