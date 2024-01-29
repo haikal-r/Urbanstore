@@ -1,9 +1,11 @@
 import Navbar from "../components/Layouts/Navbar";
 import { useSelector } from "react-redux";
 import { getProducts } from "../services/product.service";
-import { Fragment, useState, useEffect } from "react";
-import CartItem from "@/components/Fragments/CartItem";
+import { Fragment, useState, useEffect, lazy, Suspense } from "react";
 import Footer from "@/components/Layouts/Footer";
+import CartSkeleton from "@/components/skeletons/CartSkeleton";
+
+const CartItem = lazy(() => import("@/components/Fragments/CartItem"));
 
 const CartPage = () => {
   const [products, setProducts] = useState([]);
@@ -31,21 +33,25 @@ const CartPage = () => {
     <Fragment>
       <Navbar />
       <div className="max-w-7xl mx-auto">
-      <section className="px-4 sm:px-6 py-10">
-        <h1 className="font-bold text-3xl">Shopping Cart</h1>
-        <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
+        <section className="px-4 sm:px-6 py-10">
+          <h1 className="font-bold text-3xl">Shopping Cart</h1>
+          <div className="mt-12 lg:grid lg:grid-cols-12 lg:items-start gap-x-12">
             <div className="lg:col-span-7">
-                <ul>
+              <ul>
                 {products.length > 0 &&
-                    cart.map((item) => {
-                      const product = products.find((product) => product.id === item.id);
-                        return (
-                            <CartItem key={product.id} data={product} />
-                        );
-                })}
-                </ul>
+                  cart.map((item) => {
+                    const product = products.find(
+                      (product) => product.id === item.id
+                    );
+                    return (
+                      <Suspense fallback={<CartSkeleton />}>
+                        <CartItem key={product.id} data={product} />
+                      </Suspense>
+                    );
+                  })}
+              </ul>
             </div>
-        </div>
+          </div>
         </section>
       </div>
       <Footer />

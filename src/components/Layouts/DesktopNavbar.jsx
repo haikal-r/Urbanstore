@@ -13,7 +13,7 @@ const DesktopNavbar = () => {
   return (
     <div className="hidden md:flex gap-x-4 items-center">
       <Link to="/" className="flex items-center gap-1 md:gap-2">
-        <Landmark width={21} />
+        <Landmark width={19} />
         UrbanStore
       </Link>
         <NavigationMenu>
