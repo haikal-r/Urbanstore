@@ -59,7 +59,7 @@ const FormLogin = () => {
                         Sign up
                         </Link>
                     </div>
-                    <Button className="px-7">Next</Button>
+                    <Button className="px-7 rounded-lg">Next</Button>
                 </CardFooter>
             </Card>
         </form>
