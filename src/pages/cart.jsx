@@ -4,6 +4,8 @@ import { getProducts } from "../services/product.service";
 import { Fragment, useState, useEffect, lazy, Suspense } from "react";
 import Footer from "@/components/Layouts/Footer";
 import CartSkeleton from "@/components/skeletons/CartSkeleton";
+import Summary from "@/components/Fragments/Summary";
+import { formatPrice } from "@/lib/utils";
 
 const CartItem = lazy(() => import("@/components/Fragments/CartItem"));
 
@@ -44,13 +46,14 @@ const CartPage = () => {
                       (product) => product.id === item.id
                     );
                     return (
-                      <Suspense fallback={<CartSkeleton />}>
+                      <Suspense fallback={<CartSkeleton />} key={product.id}>
                         <CartItem key={product.id} data={product} />
                       </Suspense>
                     );
                   })}
               </ul>
             </div>
+          <Summary totalPrice={formatPrice(totalPrice)} />
           </div>
         </section>
       </div>
