@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import {
   CommandDialog,
   CommandEmpty,
@@ -11,6 +10,7 @@ import { Fragment, useEffect, useState, useCallback } from "react";
 import { getProducts } from "@/services/product.service";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { CiSearch } from "react-icons/ci";
 
 const SearchButton = () => {
   const [open, setOpen] = useState(false);
@@ -54,10 +54,8 @@ const SearchButton = () => {
         onClick={() => setOpen((open) => !open)}
         className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 "
       >
-        <Icon
-          icon="iconoir:search"
-          width={17}
-          className="xl:mr-2 text-slate-500 "
+        <CiSearch
+          className="xl:mr-2 text-slate-500 text-xl"
           aria-hidden="true"
         />
         <span className="font-medium text-slate-500 hidden xl:inline-flex">
