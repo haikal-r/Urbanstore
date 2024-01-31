@@ -1,27 +1,25 @@
-import { Fragment, useState, useEffect, Suspense, lazy } from "react";
-import Navbar from "../components/Layouts/Navbar";
-import Footer from "@/components/Layouts/Footer";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { getCategory } from "@/services/category.service";
 import { useParams } from "react-router-dom";
 import { getProducts } from "@/services/product.service";
 import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
 
-const ProductList = lazy(() => import('@/components/Layouts/ProductList'));
+const ProductList = lazy(() => import("@/components/Layouts/ProductList"));
 
 const ProductPage = () => {
-  const { item } = useParams()
+  const { item } = useParams();
   const [category, setCategory] = useState([]);
-  const [initialProducts, setInitialProducts] = useState([])
-  let filteredProduct
-  
-  if(item){
-    filteredProduct = category
-  }else{
-    filteredProduct = initialProducts
+  const [initialProducts, setInitialProducts] = useState([]);
+  let filteredProduct;
+
+  if (item) {
+    filteredProduct = category;
+  } else {
+    filteredProduct = initialProducts;
   }
 
   useEffect(() => {
-    getProducts( data => {
+    getProducts((data) => {
       setInitialProducts(data);
     });
   }, []);
@@ -33,22 +31,17 @@ const ProductPage = () => {
   }, [item]);
 
   return (
-    <Fragment>
-      <Navbar />
-      <div className="max-w-7xl mx-auto">
-        <section className="px-4 sm:px-6 py-8">
+    <div className="min-h-screen max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 py-8">
         <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
           {filteredProduct.map((product) => (
             <Suspense fallback={<ProductCardSkeleton />} key={product.id}>
-              <ProductList product={product}/>
+              <ProductList product={product} />
             </Suspense>
-          )
-          )}
-          </div>
-        </section>
-      </div>
-      <Footer />
-    </Fragment>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 };
 
