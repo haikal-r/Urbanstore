@@ -15,6 +15,9 @@ import { useState } from "react";
 
 const MobileNavbar = () => {
   const[isOpen, setIsOpen] = useState(false)
+  const handleOnClick = () => {
+    setIsOpen(false)
+  }
 
   return (
     <div className="flex md:hidden">
@@ -27,6 +30,7 @@ const MobileNavbar = () => {
             <Link
               to="/"
               className="flex items-center gap-2 text-base font-bold "
+              onClick={handleOnClick}
             >
               <Landmark width={19} />
               UrbanStore
@@ -41,8 +45,8 @@ const MobileNavbar = () => {
                   <AccordionContent>
                     <div className="flex flex-col gap-y-2 text-muted-foreground">
                       <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/dashboard/stores"
+                        onClick={handleOnClick}
+                        to="/dashboard/stores"
                       >
                         Stores
                       </Link>
@@ -53,18 +57,18 @@ const MobileNavbar = () => {
                   <AccordionTrigger>Lobby</AccordionTrigger>
                   <AccordionContent>
                     <div className="flex flex-col gap-y-2 text-muted-foreground">
-                      <Link onClick={() => setIsOpen(false)} href="/products">
+                      <Link onClick={handleOnClick} to="/products">
                         Products
                       </Link>
                       <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/#categories"
+                        onClick={handleOnClick}
+                        to="/#categories"
                       >
                         Categories
                       </Link>
                       <Link
-                        onClick={() => setIsOpen(false)}
-                        href="/dashboard/stores"
+                        onClick={handleOnClick}
+                        to="/dashboard/stores"
                       >
                         Create store
                       </Link>
@@ -75,12 +79,12 @@ const MobileNavbar = () => {
                   <AccordionTrigger>Category</AccordionTrigger>
                   <AccordionContent>
                     <div className="flex flex-col gap-y-2 text-muted-foreground">
-                      <Link to="/products?category=electronics">
+                      <Link to="/products/category/electronics" onClick={handleOnClick}>
                         Electronics
                       </Link>
-                      <Link to="/products?category=jewelery">Jewelery</Link>
-                      <Link to="/products?category=mens-clothing">Men's Clothing</Link>
-                      <Link to="/products?category=womens-clothing">
+                      <Link to="/products/category/jewelery" onClick={handleOnClick}>Jewelery</Link>
+                      <Link to="/products/category/men's clothing" onClick={handleOnClick}>Men's Clothing</Link>
+                      <Link to="/products/category/women's clothing" onClick={handleOnClick}>
                         Women's Clothing
                       </Link>
                     </div>
