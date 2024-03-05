@@ -2,8 +2,8 @@ import { useSelector } from "react-redux";
 import { getProducts } from "../services/product.service";
 import { useState, useEffect } from "react";
 import CartSkeleton from "@/components/skeletons/CartSkeleton";
-import Summary from "@/components/Fragments/Summary";
-import CartItem from "@/components/Fragments/CartItem";
+import Summary from "@/components/molecules/Summary";
+import CartItem from "@/components/molecules/CartItem";
 
 const CartPage = () => {
   const [products, setProducts] = useState([]);

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getProducts } from "@/services/product.service";
 import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
 
-const ProductList = lazy(() => import("@/components/Layouts/ProductList"));
+const ProductList = lazy(() => import("@/components/organism/ProductList"));
 
 const ProductPage = () => {
   const { item } = useParams();

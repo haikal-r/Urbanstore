@@ -1,4 +1,4 @@
-import CardProduct from "@/components/Fragments/CardProduct";
+import CardProduct from "@/components/molecules/CardProduct";
 import { Suspense } from "react";
 import ProductCardSkeleton from "../skeletons/ProductCardSkeleton";
 

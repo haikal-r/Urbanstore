@@ -7,6 +7,8 @@ const Summary = () => {
   const [totalPrice, setTotalPrice] = useState(0)
   const cart = useSelector((state) => state.cart.data);
 
+  console.log(totalPrice)
+
   useEffect(() => {
     const sum = cart.reduce((acc, item) => {
       return acc + item.qty * item.price;

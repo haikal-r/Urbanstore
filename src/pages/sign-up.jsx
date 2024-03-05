@@ -1,5 +1,5 @@
-import FormRegister from "../components/Fragments/FormRegister";
-import AuthLayouts from "../components/Layouts/AuthLayouts"
+import FormRegister from "@/components/molecules/FormRegister";
+import AuthLayouts from "@/components/organism/AuthLayouts"
 
 const SignUpPage = () => {
     return(

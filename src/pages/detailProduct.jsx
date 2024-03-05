@@ -4,8 +4,8 @@ import { getDetailProduct } from "../services/product.service";
 import { Fragment } from "react";
 import DetailProductSkeleton from "@/components/skeletons/DetailProductSkeleton";
 
-const Gallery = lazy(() => import("@/components/Fragments/Gallery"));
-const Info = lazy(() => import("@/components/Fragments/Info"));
+const Gallery = lazy(() => import("@/components/molecules/Gallery"));
+const Info = lazy(() => import("@/components/molecules/Info"));
 
 const DetailProductPage = () => {
   const { id } = useParams();

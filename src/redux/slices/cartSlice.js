@@ -2,9 +2,9 @@ import { createSlice } from "@reduxjs/toolkit"
 import toast  from "react-hot-toast";
 
 const cartSlice = createSlice({
-    name: "cart",
+    name: "cart-store",
     initialState: {
-        data: JSON.parse(localStorage.getItem("cart")) || [],
+        data: JSON.parse(localStorage.getItem("cart-store")) || [],
     },
     reducers: {
         addToCart: (state, action) => {
@@ -16,7 +16,7 @@ const cartSlice = createSlice({
             }else{
                 state.data.push(action.payload)
                 toast.success('Item added to cart.')
-                localStorage.setItem('cart', JSON.stringify(state.data))
+                localStorage.setItem('cart-store', JSON.stringify(state.data))
             }
         },
         removeItem: (state, action) => {
