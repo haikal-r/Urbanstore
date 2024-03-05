@@ -18,7 +18,7 @@ const DetailProductPage = () => {
   }, [id]);
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:px-8">
+    <div className="p-4 sm:p-6 lg:px-8">
       <div className="grid grid-cols-1 gap-y-3 lg:gap-y-6 lg:grid-cols-2 lg:items-start lg:gap-x-8 border rounded-md">
         {Object.keys(product).length > 0 && (
           <Fragment>

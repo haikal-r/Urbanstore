@@ -3,18 +3,18 @@ import Footer from "./components/organism/Footer";
 import Navbar from "./components/organism/Navbar";
 
 const Layout = ({ children }) => {
-  return(
-    <div>
-    <Navbar />
-    <main>
-      {children}
-      <Outlet />
-    </main>
-    <Footer />
-    </div>
-    
-
-  )
-}
+  return (
+    <>
+      <Navbar />
+      <main className="flex-1">
+        <section className="grid items-center gap-8 pb-8 pt-6 md:py-8 container max-w-6xl">
+          {children}
+          <Outlet />
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+};
 
 export default Layout;

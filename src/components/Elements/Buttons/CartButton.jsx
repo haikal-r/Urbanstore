@@ -20,7 +20,7 @@ const CartButton = () => {
     <Button
       onClick={() => navigate("/cart")}
       variant="outline"
-      className="gap-1"
+      className="gap-1 shadow-sm"
       size="sm"
     >
       <ShoppingCart width={17} />

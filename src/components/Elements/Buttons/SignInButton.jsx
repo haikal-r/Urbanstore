@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 const SignUpButton = () => {
   return (
     <Link to="/sign-in">
-      <Button className="text-white font-medium rounded-xl" size="sm">
+      <Button className="text-white text-xs font-medium rounded-lg" size="sm">
         Sign In
       </Button>
     </Link>

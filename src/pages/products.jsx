@@ -31,17 +31,15 @@ const ProductPage = () => {
   }, [item]);
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto">
-      <section className="px-4 sm:px-6 py-8">
-        <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {filteredProduct.map((product) => (
-            <Suspense fallback={<ProductCardSkeleton />} key={product.id}>
-              <ProductList product={product} />
-            </Suspense>
-          ))}
-        </div>
-      </section>
-    </div>
+    <section className="px-4 sm:px-6 py-8">
+      <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
+        {filteredProduct.map((product) => (
+          <Suspense fallback={<ProductCardSkeleton />} key={product.id}>
+            <ProductList product={product} />
+          </Suspense>
+        ))}
+      </div>
+    </section>
   );
 };
 

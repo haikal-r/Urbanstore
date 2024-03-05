@@ -52,16 +52,17 @@ const SearchButton = () => {
       <Button
         variant="outline"
         onClick={() => setOpen((open) => !open)}
-        className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 "
+        className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2 shadow-sm"
+        size="sm"
       >
         <CiSearch
-          className="xl:mr-2 text-slate-500 text-xl"
+          className="xl:mr-2 text-foreground text-xl"
           aria-hidden="true"
         />
-        <span className="font-medium text-slate-500 hidden xl:inline-flex">
+        <span className="font-medium text-foreground hidden xl:inline-flex">
           Search products...
         </span>
-        <kbd className="pointer-events-none absolute z-10 right-2 top-2 hidden h-6 select-none items-center gap-1 rounded-full border bg-muted px-1.5 font-mono text-xs font-medium opacity-100 xl:flex">
+        <kbd className="pointer-events-none absolute z-10 right-2 top-2 hidden h-6 select-none items-center gap-1 rounded-sm border bg-muted px-1.5 font-mono text-xs font-medium opacity-100 xl:flex">
           <abbr title="Control" className="no-underline">
             Ctrl
           </abbr>
