@@ -10,14 +10,14 @@ const Gallery = ({ product }) => {
         <div className='relative w-[70%] h-[70%] rounded-lg  '>
           <img
             src={product.image}
-            alt='Image'
+            alt={product.title}
             className='object-cover object-center rounded-lg'
           />
         </div>
       </Tab.Panels>
       <div className='mt-6 w-full'>
         <Tab.List className='grid grid-cols-4 gap-6'>
-          <GalleryTab product={product} />
+          <GalleryTab product={product.image} />
         </Tab.List>
       </div>
       </Tab.Group>

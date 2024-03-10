@@ -8,7 +8,7 @@ const GalleryTab = ({ product }) => {
         <div>
           <span className='absolute h-full w-full aspect-square inset-0 overflow-hidden rounded-md'>
             <img
-              src={product.image}
+              src={product}
               alt={product.title ?? 'Product image'}
               className='object-cover object-center'
             />

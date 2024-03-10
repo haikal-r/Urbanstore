@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/slices/cartSlice";
-import { ShoppingCart } from "lucide-react";
-import IconButton from "../ui/iconButton";
 
-const CardProduct = (props) => {
+const ProductCard = (props) => {
   const { children, id } = props;
   
   return (
@@ -42,7 +38,6 @@ const Body = (props) => {
 
 const Footer = (props) => {
   const { price, id } = props;
-  const dispatch = useDispatch();
 
   return (
     <div className="flex justify-between items-center px-5 pb-5">
@@ -50,25 +45,12 @@ const Footer = (props) => {
         $
         {price.toLocaleString("id-ID", { styles: "currency", currency: "IDR" })}
       </h1>
-      <div className="flex justify-center group/icon">
-        <IconButton
-          aria-label="add-to-cart"
-          className="bg-emerald-50 group-hover/icon:bg-emerald-500"
-          onClick={(e) => e.preventDefault() || dispatch(addToCart({ id: id, qty: 1, price:price }))}
-          icon={
-            <ShoppingCart
-              size={20}
-              className="text-emerald-600 group-hover/icon:text-emerald-50"
-            />
-          }
-        />
-      </div>
     </div>
   );
 };
 
-CardProduct.Header = Header;
-CardProduct.Body = Body;
-CardProduct.Footer = Footer;
+ProductCard.Header = Header;
+ProductCard.Body = Body;
+ProductCard.Footer = Footer;
 
-export default CardProduct;
+export default ProductCard;

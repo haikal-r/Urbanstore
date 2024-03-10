@@ -4,10 +4,8 @@ import { Button } from "../ui/button";
 import { formatPrice } from "@/lib/utils";
 
 const Summary = () => {
-  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalPrice, setTotalPrice] = useState(0);
   const cart = useSelector((state) => state.cart.data);
-
-  console.log(totalPrice)
 
   useEffect(() => {
     const sum = cart.reduce((acc, item) => {
@@ -23,13 +21,14 @@ const Summary = () => {
       </h2>
       <div className="lg:mt-6 space-y-4">
         <div className="flex items-center lg:flex-col justify-end gap-3 lg:border-t lg:border-gray-200 lg:pt-4">
-          <div className='flex flex-col lg:w-full lg:flex-row lg:justify-between text-sm lg:text-base'>
-            <span className="font-medium text-gray-900">
-              Order total
-            </span>
+          <div className="flex flex-col lg:w-full lg:flex-row lg:justify-between text-sm lg:text-base">
+            <span className="font-medium text-gray-900">Order total</span>
             <span className="font-bold">{formatPrice(totalPrice)}</span>
           </div>
-          <Button className="lg:w-full mt-6 my-auto hover:before:-translate-x-[500px] rounded-lg" disabled={totalPrice === 0}>
+          <Button
+            className="lg:w-full mt-6 my-auto hover:before:-translate-x-[500px] rounded-lg"
+            disabled={totalPrice === 0}
+          >
             Checkout
           </Button>
         </div>

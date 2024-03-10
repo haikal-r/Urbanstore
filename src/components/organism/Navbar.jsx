@@ -1,8 +1,8 @@
-import CartButton from "../Elements/Buttons/CartButton";
-import SearchButton from "../Elements/Buttons/SearchButton";
-import UserAccountNav from "../Elements/auth/UserAccountNav";
+import CartButton from "../atoms/Buttons/CartButton";
+import SearchButton from "../atoms/Buttons/SearchButton";
+import UserAccountNav from "../atoms/auth/UserAccountNav";
 import { useLogin } from "@/hooks/useLogin";
-import SignInButton from "../Elements/Buttons/SignInButton";
+import SignInButton from "../atoms/Buttons/SignInButton";
 import DesktopNavbar from "./DesktopNavbar";
 import MobileNavbar from "./MobileNavbar"
 import { Separator } from "@/components/ui/separator";

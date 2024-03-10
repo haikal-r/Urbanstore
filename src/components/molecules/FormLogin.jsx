@@ -1,4 +1,4 @@
-import InputForm from "../Elements/Input";
+import InputForm from "../atoms/Input";
 import { Link } from "react-router-dom";
 import { login } from "../../services/auth.service";
 import {
