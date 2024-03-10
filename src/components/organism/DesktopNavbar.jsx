@@ -22,16 +22,16 @@ const DesktopNavbar = () => {
             <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
             <NavigationMenuContent>
             <ul className='grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-2'>
-                <ListItem href='/products/category/electronics' title='Electronics'>
+                <ListItem href='/category/electronics' title='Electronics'>
                   Explore the skateboards category
                 </ListItem>
-                <ListItem href='/products/category/jewelery' title='Jewelery'>
+                <ListItem href='/category/jewelery' title='Jewelery'>
                   Explore the clothing category
                 </ListItem>
-                <ListItem href="/products/category/men's clothing" title='Mens Clothing'>
+                <ListItem href="/category/men's clothing" title='Mens Clothing'>
                   Explore the shoes category
                 </ListItem>
-                <ListItem href="/products/category/women's clothing" title='Womens Clothing'>
+                <ListItem href="/category/women's clothing" title='Womens Clothing'>
                   Explore the accessories category
                 </ListItem>
               </ul>
