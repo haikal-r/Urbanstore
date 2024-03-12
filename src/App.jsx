@@ -7,7 +7,7 @@ import CartPage from "./pages/cart";
 import SignUpPage from "./pages/sign-up";
 import DetailProductPage from "./pages/detailProduct";
 import ErrorPage from "./pages/404";
-import MainPage from "./pages/main";
+import MainPage from "./pages";
 
 const App = () => {
   return (
