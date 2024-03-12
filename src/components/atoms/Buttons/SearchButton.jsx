@@ -7,16 +7,16 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Fragment, useEffect, useState, useCallback } from "react";
-import { getProducts } from "@/services/product.service";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CiSearch } from "react-icons/ci";
+import { useFetchProducts } from "@/hooks/product/useFetchProducts";
 
 const SearchButton = () => {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [data, setData] = useState([]);
-  const category = Array.from(new Set(data.map((product) => product.category)));
+  const { data } = useFetchProducts();
+  const category = Array.from(new Set(data?.data.map((product) => product.category)));
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,12 +28,6 @@ const SearchButton = () => {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  useEffect(() => {
-    getProducts((data) => {
-      setData(data);
-    });
   }, []);
 
   useEffect(() => {
@@ -87,7 +81,7 @@ const SearchButton = () => {
             {category.map((category) => {
               return (
                 <CommandGroup key={category} heading={category}>
-                  {data
+                  {data?.data
                     .filter((product) => product.category === category)
                     .map((product) => (
                       <CommandItem

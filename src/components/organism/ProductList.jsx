@@ -1,6 +1,4 @@
-import ProductCard from "@/components/molecules/ProductCard";
-import { Suspense } from "react";
-import ProductCardSkeleton from "../skeletons/ProductCardSkeleton";
+import ProductCard from "@/components/molecules/CardProduct";
 
 const ProductList = ({ product }) => {
   return (
