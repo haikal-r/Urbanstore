@@ -15,15 +15,15 @@ const DetailProductSkeleton = () => {
         </div>
       </div>
       <div className="flex flex-col gap-y-3 p-5">
-        <Skeleton className="w-full h-[50px]" />
-        <Skeleton className="w-[250px] h-[50px]" />
-        <Skeleton className="w-[400px] h-[50px]" />
+        <Skeleton className="w-full h-[40px] mb-2" />
+        <Skeleton className="w-[250px] h-[35px] mb-2" />
+        <Skeleton className="w-[400px] h-[30px]" />
         <Separator />
         <div className="flex gap-3 py-3">
-          <Skeleton className="w-[200px] h-[50px]" />
-          <Skeleton className="w-[200px] h-[50px]" />
+          <Skeleton className="w-[150px] h-[35px]" />
+          <Skeleton className="w-[150px] h-[35px]" />
         </div>
-        <Skeleton className="w-full h-[200px] rounded full" />
+        
       </div>
     </>
   );
