@@ -1,43 +1,32 @@
-import { useState, useEffect, Suspense, lazy } from "react";
-import { getCategory } from "@/services/category.service";
+import { Suspense, lazy } from "react";
 import { useParams } from "react-router-dom";
-import { getProducts } from "@/services/product.service";
 import ProductCardSkeleton from "@/components/skeletons/ProductCardSkeleton";
-
-const ProductList = lazy(() => import("@/components/organism/ProductList"));
+import { useFetchCategory } from "@/hooks/product/useFetchCategory";
+import { useFetchProducts } from "@/hooks/product/useFetchProducts";
+import ProductList from "@/components/organism/ProductList";
 
 const ProductPage = () => {
-  const { item } = useParams();
-  const [category, setCategory] = useState([]);
-  const [initialProducts, setInitialProducts] = useState([]);
-  let filteredProduct;
+  const { item: selectedCategory } = useParams();
+  const { data: products, isLoading: productIsLoading, isFetching: productIsFetching } = useFetchProducts();
+  const { data: category, isLoading: categoryIsLoading, isFetching: categoryIsFetching } =useFetchCategory(selectedCategory);
+  let filteredProducts;
 
-  if (item) {
-    filteredProduct = category;
+  if (selectedCategory) {
+    filteredProducts = category;
   } else {
-    filteredProduct = initialProducts;
+    filteredProducts = products;
   }
 
-  useEffect(() => {
-    getProducts((data) => {
-      setInitialProducts(data);
-    });
-  }, []);
-
-  useEffect(() => {
-    getCategory(item, (data) => {
-      setCategory(data);
-    });
-  }, [item]);
-
   return (
-    <section className="px-4 sm:px-6 py-8">
+    <section className="md:py-8 py-4">
       <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {filteredProduct.map((product) => (
-          <Suspense fallback={<ProductCardSkeleton />} key={product.id}>
-            <ProductList product={product} />
-          </Suspense>
-        ))}
+        {productIsLoading || categoryIsLoading || productIsFetching || categoryIsFetching ? (
+          <ProductCardSkeleton />
+        ) : (
+          filteredProducts?.data.map((product) => (
+            <ProductList key={product.id} product={product} />
+          ))
+        )}
       </div>
     </section>
   );
