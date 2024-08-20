@@ -1,6 +1,3 @@
-import { Separator } from "@/components/ui/separator";
-import { selectCurrentUser } from "@/store/slices/auth-slice";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import UserAccountNav from "../atoms/auth/user-account-nav";
 import CartButton from "../atoms/buttons/cart-button";

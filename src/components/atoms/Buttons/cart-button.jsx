@@ -28,3 +28,4 @@ const CartButton = ({ cart }) => {
 };
 
 export default CartButton;
+
