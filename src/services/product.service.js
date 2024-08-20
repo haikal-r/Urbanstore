@@ -1,23 +1,22 @@
-import axios from 'axios';
+import { getApiResponse } from "@/lib/api";
 
-export const getProducts = (callback) => {
-    axios
-    .get("https://fakestoreapi.com/products")
-    .then((res) => {
-      callback(res.data)
-    })
-    .catch((err) => {
-      callback(err)
-    })
-}
+export const getAllProducts = async (query) => {
+  try {
+    const response = await getApiResponse("products", query)
+    console.log(response)
+    
+    return response.data  
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
-export const getDetailProduct = (id, callback) => {
-    axios
-    .get(`https://fakestoreapi.com/products/${id}`)
-    .then((res) => {
-        callback(res.data)
-    })
-    .catch((err) => {
-        callback(err)
-    })
+export const getProductByUuid = async (uuid) => {
+  try {
+    const response = await getApiResponse(`products/${uuid}`)
+
+    return response
+  } catch (error) {
+    console.log(error.message)
+  }
 }

@@ -1,38 +1,74 @@
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import { axiosClient, axiosPrivate } from "@/lib/axios";
+import axios from "axios"
 
-export const login = (data, callback) => {
-    axios.post("https://fakestoreapi.com/auth/login", data).then((res) => {
-        callback(true, res.data.token)
+//* TODO: create password confirmation to register
+
+export const loginAPI = async (user) => {
+  try {
+    
+    const response = await axiosClient.post(`/login`, {
+      email: user.email,
+      password: user.password
     })
-    .catch((err) => {
-        callback(false, err)
-    })
+
+    return response.data
+  } catch (error) {
+    throw error;
+  }
 }
 
-export const getUsername = (token) => {
-    const decoded = jwtDecode(token)
-    return decoded.user
+
+export const registerAPI = async (user) => {
+  try {
+    return await axiosClient.post(`/register`, {
+      email: user.email,
+      password: user.password,
+      username: user.username,
+      name: user.name,
+    })
+  } catch (error) {
+    throw error
+  }
+} 
+
+export const loginGoogleAPI = async () => {
+  
+  try {
+    const response =  await axios.get(`api/v1/auth/google/callback`)
+    
+    return response
+  } catch (e) {
+    throw e;
+  }
 }
 
-export const getUsers = (callback) => {
-    axios
-    .get(`https://fakestoreapi.com/users`)
-    .then((res) => {
-        callback(res.data)
-    })
-    .catch((err) => {
-        callback(err)
-    })
-}
 
-export const getDetailUsers = (id, callback) => {
-    axios
-    .get(`https://fakestoreapi.com/users/${id}`)
-    .then((res) => {
-        callback(res.data)
-    })
-    .catch((err) => {
-        console.log(err)
-    })
-}
+
+export const logoutAPI = async () => {
+  try {
+      return await axiosPrivate.post(`/logout`)
+  
+    } catch (e) {
+      throw e
+    }
+  }
+
+  export const refreshTokenAPI = async () => {
+    try {
+      return await axiosPrivate.get(`/refresh-token`)
+    } catch (error) {
+      throw error
+    }
+  }
+
+
+  export const profileAPI = async () => {
+    try {
+        return await axiosPrivate.get(`/me`);
+
+      
+    } catch (e) {
+        throw e;
+    }
+};
+
