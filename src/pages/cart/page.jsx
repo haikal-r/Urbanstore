@@ -1,5 +1,4 @@
 import { Icons } from "@/components/atoms/icons";
-import { ErrorCard } from "@/components/cards/error-card";
 import Summary from "@/components/molecules/summary";
 import CartSkeleton from "@/components/skeletons/cart-skeleton";
 import CartTable from "@/components/tables/cart/table";
@@ -14,7 +13,6 @@ import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
 
 const CartPage = () => {
   const [selectedPrices, setSelectedPrices] = useState([]);
