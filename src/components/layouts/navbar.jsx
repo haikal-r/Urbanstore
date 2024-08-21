@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import UserAccountNav from "../atoms/auth/user-account-nav";
-import CartButton from "../atoms/buttons/cart-button";
-import SignInButton from "../atoms/buttons/login-button";
-import SearchButton from "../atoms/buttons/search-button";
-import DesktopNavbar from "./desktop-navbar";
-import MobileNavbar from "./mobile-navbar";
+import UserAccountNav from "@/components/atoms/auth/user-account-nav";
+import CartButton from "@/components/atoms/buttons/cart-button";
+import SignInButton from "@/components/atoms/buttons/login-button";
+import SearchButton from "@/components/atoms/buttons/search-button";
+import DesktopNavbar from "@/components/layouts/desktop-navbar";
+import MobileNavbar from "@/components/layouts/mobile-navbar";
 
 const Navbar = () => {
   const user = useSelector((state) => state.auth.data);
