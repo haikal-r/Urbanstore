@@ -1,7 +1,7 @@
 import { useCreateOrderItem } from "@/features/order/use-create-order";
 import { formatPriceIDR, navigate } from "@/lib/utils";
 import toast from "react-hot-toast";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
 
 const Summary = ({ totalPrice, refetch }) => {
