@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import UserAccountNav from "@/components/atoms/auth/user-account-nav";
-import CartButton from "@/components/atoms/buttons/cart-button";
-import SignInButton from "@/components/atoms/buttons/login-button";
-import SearchButton from "@/components/atoms/buttons/search-button";
+import UserAccountNav from "@/components/atoms/user-account-nav";
+import CartButton from "@/components/atoms/cart-button";
+import SignInButton from "@/components/atoms/login-button";
+import SearchButton from "@/components/atoms/search-button";
 import DesktopNavbar from "@/components/layouts/desktop-navbar";
 import MobileNavbar from "@/components/layouts/mobile-navbar";
 
