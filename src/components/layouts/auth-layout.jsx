@@ -6,7 +6,6 @@ import { useFetchProducts } from "@/features/product/use-fetch-products";
 const AuthLayouts = (props) => {
     const { children } = props;
     const { data } = useFetchProducts()
-    console.log(data)
 
     return(
         <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-3 min-h-screen overflow-hidden">

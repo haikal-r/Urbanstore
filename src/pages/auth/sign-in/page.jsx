@@ -29,7 +29,7 @@ const SignInPage = () => {
 
   const googleHandler = () => {
     setIsLoading(true);
-    window.open("http://localhost:4000/auth/google", "_self");
+    window.open(`${API_URL}/auth/google`, "_self");
   };
 
 
