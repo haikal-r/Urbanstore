@@ -13,20 +13,41 @@ import {
 import { Link } from "react-router-dom";
 
 import FormRegister from "@/components/forms/form-signup";
-import { useEffect, useState } from "react";
-import { navigate } from "@/lib/utils";
-import { useSelector } from "react-redux";
 import { API_URL } from "@/constants/api";
+import { navigate } from "@/lib/utils";
+import { fetchUserInfo } from "@/services/auth.service";
+import { setToken, setUser } from "@/store/slices/auth-slice";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
 
 const SignUpPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {
-    data: { name: user },
-  } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (user) navigate("/");
-  }, [user, navigate]);
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+
+    if (token) {
+      handleToken(token);
+    }
+  }, [location]);
+
+  const handleToken = async (token) => {
+    setIsLoading(true);
+    try {
+      dispatch(setToken(token));
+      const userData = await fetchUserInfo(token);
+      dispatch(setUser(userData));
+      
+      navigate('/');
+    } catch (error) {
+      toast.error('Login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const googleHandler = () => {
     setIsLoading(true);

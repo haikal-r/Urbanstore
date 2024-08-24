@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 
 // import react-redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // import react-router-dom
 import { Link } from "react-router-dom";
@@ -19,14 +19,52 @@ import FormLogin from "@/components/forms/form-signin";
 import { navigate } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { API_URL } from "@/constants/api";
+import { setToken, setUser } from "@/store/slices/auth-slice";
+import toast from "react-hot-toast";
+import { axiosClient, axiosPrivate } from "@/lib/axios";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { data: { name: user } } = useSelector((state) => state.auth);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    if (user) navigate('/');
-  }, [user, navigate]);
+    const params = new URLSearchParams(location.search);
+    const token = params.get('token');
+
+    if (token) {
+      handleToken(token);
+    }
+  }, [location]);
+
+  const handleToken = async (token) => {
+    setIsLoading(true);
+    try {
+      dispatch(setToken(token));
+      const userData = await fetchUserInfo(token);
+      dispatch(setUser(userData));
+      
+      navigate('/');
+    } catch (error) {
+      toast.error('Login failed. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchUserInfo = async (token) => {
+    try {
+      const response = await axiosClient.get('/me', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      return response.data.data
+    } catch (error) {
+      // Jika ada kesalahan, tangani di sini
+      console.error('Error fetching user data:', error);
+    }
+  };
 
   const googleHandler = () => {
     setIsLoading(true);

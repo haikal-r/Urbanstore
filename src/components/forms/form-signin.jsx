@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 // import react-redux
-import { getProfile } from "@/store/slices/auth-slice";
+import { getProfile, setToken } from "@/store/slices/auth-slice";
 import { useDispatch, useSelector } from "react-redux";
 
 // import react-router-dom
@@ -29,12 +29,14 @@ const FormLogin = () => {
   const navigate = useNavigate();
 
   const { mutate: login, isLoading: loginIsLoading } = useLogin({
-    onSuccess: () => {
+    onSuccess: async (data) => {
+      dispatch(setToken(data.accessToken))
       dispatch(getProfile());
+      
       toast.success("Success Sign in");
       navigate("/");
     },
-    onError: (error) => {
+    onError: () => {
       toast.error('Sign in failed. Please check your email and password and try again.');
     },
   });

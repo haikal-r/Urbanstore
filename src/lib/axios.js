@@ -1,6 +1,5 @@
 import { API_URL } from "@/constants/api";
 import axios from "axios";
-import Cookies from "js-cookie";
 import { store } from "@/store";
 import { reset } from "@/store/slices/auth-slice";
 
@@ -15,7 +14,7 @@ const axiosPrivate = axios.create({
 
 axiosPrivate.interceptors.request.use(
   (config) => {
-    const token = Cookies.get("accessToken");
+    const token = store.getState().auth.accessToken
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -53,8 +52,6 @@ axiosPrivate.interceptors.response.use(
           refreshError.response?.status === 401 ||
           refreshError.response?.status === 403
         ) {
-          Cookies.remove("accessToken");
-          Cookies.remove("refreshToken");
           store.dispatch(reset());
         }
 

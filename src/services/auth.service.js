@@ -1,7 +1,5 @@
 import { axiosClient, axiosPrivate } from "@/lib/axios";
-import axios from "axios"
-
-//* TODO: create password confirmation to register
+import toast from "react-hot-toast";
 
 export const loginAPI = async (user) => {
   try {
@@ -31,44 +29,21 @@ export const registerAPI = async (user) => {
   }
 } 
 
-export const loginGoogleAPI = async () => {
-  
+
+export const fetchUserInfo = async (token) => {
   try {
-    const response =  await axios.get(`api/v1/auth/google/callback`)
-    
-    return response
-  } catch (e) {
-    throw e;
+    const response = await axiosClient.get('/me', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    return response.data.data
+  } catch (error) {
+    toast.error('Error fetching user data')
   }
-}
-
-
-
-export const logoutAPI = async () => {
-  try {
-      return await axiosPrivate.post(`/logout`)
-  
-    } catch (e) {
-      throw e
-    }
-  }
-
-  export const refreshTokenAPI = async () => {
-    try {
-      return await axiosPrivate.get(`/refresh-token`)
-    } catch (error) {
-      throw error
-    }
-  }
-
-
-  export const profileAPI = async () => {
-    try {
-        return await axiosPrivate.get(`/me`);
-
-      
-    } catch (e) {
-        throw e;
-    }
 };
+
+
+
 
