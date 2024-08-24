@@ -6,7 +6,7 @@ export const useLogin = ({ onSuccess, onError }) => {
     mutationFn: async (user) => {
       const response = await loginAPI(user)
 
-      return response.data.data
+      return response.data
     },
     mutationKey: ['login'],
     onSuccess,

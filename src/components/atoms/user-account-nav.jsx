@@ -10,14 +10,13 @@ import {
 import { LayoutDashboard, LogOut, User as UserIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { store } from "@/store";
-import { reset as resetCart } from "@/store/slices/cart-slice";
 import { reset as resetAuth } from "@/store/slices/auth-slice";
-import Cookies from "js-cookie";
+import { reset as resetCart } from "@/store/slices/cart-slice";
+
+import { axiosClient } from "@/lib/axios";
+import { getInitials } from "@/lib/utils";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { axiosClient, axiosPrivate } from "@/lib/axios";
-import { getInitials } from "@/lib/utils";
 
 const UserAccountNav = ({ user }) => {
   const navigate = useNavigate();

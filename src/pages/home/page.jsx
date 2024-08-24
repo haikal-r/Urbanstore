@@ -27,18 +27,6 @@ export default function MainPage() {
     isFetching: productIsFetching,
   } = useFetchProducts();
 
-
-  const dispatch = useDispatch();
- 
-
-  useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
-    if (accessToken) {
-      dispatch(getProfile())
-    }
-  }, [dispatch]);
- 
-
   return (
     <Shell className="max-w-6xl gap-0 ">
       <section className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-4 py-24 text-center md:py-32">
