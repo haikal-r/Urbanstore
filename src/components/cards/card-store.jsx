@@ -12,7 +12,6 @@ import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
 
 const StoreCard = ({ data }) => {
-  console.log(data)
   return (
     <Link to={`/dashboard/stores/${data.slug}`}>
       <Card className="h-full overflow-hidden">

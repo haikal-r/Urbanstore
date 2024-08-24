@@ -5,10 +5,8 @@ import { useParams } from "react-router-dom";
 
 const EditProductPage = () => {
   const { uuid } = useParams();
-  console.log(uuid);
-  const { data } = useFetchProductByUuid(uuid);
 
-  console.log(data);
+  const { data } = useFetchProductByUuid(uuid);
 
   return (
     <StoreLayouts title="Edit Product" description="Edit your product here">

@@ -50,7 +50,7 @@ export function AddProductForm() {
   const onSubmit = async (values) => {
     try {
       setIsLoading(true);
-      console.log(values);
+
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("category", values.category);
@@ -61,8 +61,6 @@ export function AddProductForm() {
       Array.from(values.images).forEach((file) => {
         formData.append("images", file.file);
       });
-
-      console.log(formData)
 
       await axiosPrivate.post(`/api/v1/stores/${slug}/products`, formData, {
         headers: {

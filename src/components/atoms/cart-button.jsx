@@ -6,13 +6,12 @@ import { useEffect, useState } from "react";
 
 const CartButton = ({ cart }) => {
   const [totalCart, setTotalCart] = useState(0);
-  
+
   const navigate = useNavigate();
-  console.log(cart)
 
   useEffect(() => {
-    setTotalCart(cart.length)
-  }, [cart])
+    setTotalCart(cart.length);
+  }, [cart]);
 
   return (
     <Button
@@ -28,4 +27,3 @@ const CartButton = ({ cart }) => {
 };
 
 export default CartButton;
-

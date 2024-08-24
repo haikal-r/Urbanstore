@@ -23,8 +23,7 @@ const OrderPage = () => {
 
   const status = Object.keys(statuses).find((key) => statuses[key] === true);
   const { data: orders = [], isLoading, error } = useFetchOrders(status);
-  console.log(orders);
-
+  
   return (
     <DashboardLayouts>
       {orders && (

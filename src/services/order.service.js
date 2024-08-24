@@ -3,11 +3,12 @@ import { axiosPrivate } from "@/lib/axios";
 
 export const getOrderItem = async (status) => {
   try {
-    console.log(status)
-    const response = await getPrivateApiResponse("orders", `status=${status || ''}`);
-    console.log(response)
+    const response = await getPrivateApiResponse(
+      "orders",
+      `status=${status || ""}`
+    );
+
     return response;
-    
   } catch (error) {
     console.error(error);
   }

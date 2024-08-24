@@ -1,27 +1,25 @@
-import { getApiResponse } from '@/lib/api'
-import { getCategoryResponse } from '@/services/category.service'
-import { useQuery } from "@tanstack/react-query"
+import { getApiResponse } from "@/lib/api";
+import { getCategoryResponse } from "@/services/category.service";
+import { useQuery } from "@tanstack/react-query";
 
 export const useFetchCategory = () => {
   return useQuery({
     queryFn: async () => {
-      const categoryResponse = await getApiResponse("products")
-      console.log(categoryResponse)
+      const categoryResponse = await getApiResponse("products");
 
       return categoryResponse;
     },
-    queryKey: ["fetch.category"]
-  })
-}
+    queryKey: ["fetch.category"],
+  });
+};
 
 export const useFetchCategories = () => {
   return useQuery({
     queryFn: async () => {
-      const categoriesResponse = await getApiResponse('products/categories')
-      console.log(categoriesResponse)
+      const categoriesResponse = await getApiResponse("products/categories");
 
-      return categoriesResponse
+      return categoriesResponse;
     },
-    queryKey: ['fetch.categories']
-  })
-}
+    queryKey: ["fetch.categories"],
+  });
+};

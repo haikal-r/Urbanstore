@@ -63,7 +63,6 @@ export const columns = [
     enableHiding: false,
     cell: ({ row }) => {
       const order = row.original;
-      console.log(order)
 
       const [loading, setLoading] = useState(false);
       const [open, setOpen] = useState(false);
@@ -74,7 +73,6 @@ export const columns = [
           await axiosClient.delete(`/api/v1/orders/${order.id}/cancel`);
           toast.success("Order canceled.");
         } catch (error) {
-          console.log(error);
           if (error) {
             return toast.error(error.response?.data);
           }

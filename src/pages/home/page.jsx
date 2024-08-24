@@ -33,7 +33,7 @@ export default function MainPage() {
 
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
-    if (accessToken ) {
+    if (accessToken) {
       dispatch(getProfile())
     }
   }, [dispatch]);

@@ -5,14 +5,12 @@ import { useMutation } from "@tanstack/react-query";
 export const useRegister = ({ onSuccess, onError }) => {
   return useMutation({
     mutationFn: async (user) => {
-      // const response = await registerAPI(user)
-      const response = await axiosClient.post('/register', user)
-      console.log(response)
+      const response = await axiosClient.post("/register", user);
 
-      return response.data
+      return response.data;
     },
-    mutationKey: ['register'],
+    mutationKey: ["register"],
     onSuccess,
-    onError
-  })
-}
+    onError,
+  });
+};

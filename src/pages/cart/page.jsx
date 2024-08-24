@@ -103,7 +103,6 @@ const CartPage = () => {
       header: () => <div className="text-left">Product</div>,
       cell: ({ row }) => {
         const onRemove = (id) => {
-          console.log(id);
           deleteCartItem({ productId: id });
         };
         return (
@@ -236,7 +235,6 @@ const CartPage = () => {
       <div className="md:grid md:grid-cols-12 md:items-start md:justify-between gap-x-12">
         {cartItemsIsLoading || isFetching || deleteCartItemIsLoading ? (
           <CartSkeleton />
-          
         ) : (
           <>
             <div className="md:col-span-8">

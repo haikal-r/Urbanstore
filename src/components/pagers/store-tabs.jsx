@@ -6,13 +6,10 @@ import { cn } from '@/lib/utils'
 
 
 export function StoreTabs({ slug }) {
-  console.log(slug)
   const { slug: paramStoreId } = useParams()
   const location = useLocation()
   const navigate = useNavigate()
-
   const segment = location.pathname.split('/').pop()
-  console.log('segment =>', segment)
 
   const tabs = [
     {

@@ -29,7 +29,6 @@ const Summary = ({ totalPrice, refetch }) => {
       }
     },
     onError: (error) => {
-      console.log(error)
       toast.error(error.response.data.message)
     }
   })

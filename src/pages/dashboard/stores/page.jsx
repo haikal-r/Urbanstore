@@ -13,7 +13,6 @@ import { StoreCardSkeleton } from "@/components/skeletons/store-card-skeleton";
 const StorePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: stores, isLoading, isFetching, error } = useFetchStores();
-  console.log(stores);
 
   return (
     <DashboardLayouts>

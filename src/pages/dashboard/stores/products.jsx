@@ -9,8 +9,6 @@ const ProductsStorePage = () => {
   const { slug } = useParams();
   const { data: products = [], error } = useFetchProductsByStore(slug);
 
-  console.log(products);
-
   return (
     <StoreLayouts title="Products" description="Manage your products here">
       <div className="flex flex-col gap-3">

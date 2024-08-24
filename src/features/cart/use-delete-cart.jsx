@@ -1,15 +1,16 @@
-import { axiosPrivate } from "@/lib/axios"
-import { useMutation } from "@tanstack/react-query"
+import { axiosPrivate } from "@/lib/axios";
+import { useMutation } from "@tanstack/react-query";
 
 export const useDeleteCartItem = ({ onSuccess }) => {
   return useMutation({
     mutationFn: async (body) => {
-      console.log(body)
-      const cartResponse = await axiosPrivate.delete("/api/v1/carts", { data: body })
+      const cartResponse = await axiosPrivate.delete("/api/v1/carts", {
+        data: body,
+      });
 
-      return cartResponse
+      return cartResponse;
     },
-    mutationKey: ['delete.cartItem'],
-    onSuccess
-  })
-}
+    mutationKey: ["delete.cartItem"],
+    onSuccess,
+  });
+};

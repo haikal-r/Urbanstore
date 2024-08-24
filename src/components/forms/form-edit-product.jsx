@@ -22,7 +22,6 @@ import { useParams } from "react-router-dom";
 
 export function EditProductForm({ data }) {
   const { slug } = useParams()
-  console.log(slug)
 
   const form = useForm({
     defaultValues: {

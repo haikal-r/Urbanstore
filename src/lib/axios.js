@@ -16,7 +16,6 @@ const axiosPrivate = axios.create({
 axiosPrivate.interceptors.request.use(
   (config) => {
     const token = Cookies.get("accessToken");
-    console.log(token);
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -31,22 +30,18 @@ axiosPrivate.interceptors.request.use(
 
 axiosPrivate.interceptors.response.use(
   (response) => {
-    console.log(response);
     return response;
   },
   async (error) => {
-    console.log(error)
     const originalConfig = error.config;
     if (error.response?.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
       originalConfig.headers = JSON.parse(
         JSON.stringify(originalConfig.headers)
       );
-      
 
       try {
         const response = await axiosClient.get("/refresh-token");
-        console.log(response);
 
         const newAccessToken = response.data.data;
 
@@ -54,12 +49,14 @@ axiosPrivate.interceptors.response.use(
 
         return axiosPrivate(originalConfig);
       } catch (refreshError) {
-        if (refreshError.response?.status === 401 || refreshError.response?.status === 403) {
+        if (
+          refreshError.response?.status === 401 ||
+          refreshError.response?.status === 403
+        ) {
           Cookies.remove("accessToken");
           Cookies.remove("refreshToken");
           store.dispatch(reset());
         }
-
 
         return Promise.reject(refreshError);
       }

@@ -17,12 +17,8 @@ const CartItem = ({ data }) => {
     }
   })
 
-
-  console.log({ productId: data.id })
-
   const onRemove = async () => {
     dispatch(removeItem(data.productId));
-    // deleteCartItem(data.id)
     await axiosPrivate.delete("/api/v1/carts", { productId: data.id  })
 
   };
