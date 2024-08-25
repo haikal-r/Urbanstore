@@ -230,26 +230,27 @@ const CartPage = () => {
   };
 
   return (
-    <Shell className="max-w-6xl gap-10 items-center">
-      <h1 className="font-bold text-3xl">Shopping Cart</h1>
-      <div className="md:grid md:grid-cols-12 md:items-start md:justify-between gap-x-12">
-        {cartItemsIsLoading || isFetching || deleteCartItemIsLoading ? (
-          <CartSkeleton />
-        ) : (
-          <>
-            <div className="md:col-span-8">
-              <CartTable columns={columns} data={carts?.cartItems || []} />
-            </div>
-            <div className="md:col-span-4">
-              <Summary
-                totalPrice={totalPrice || 0}
-                refetch={handleRefetchSuccess}
-              />
-            </div>
-          </>
-        )}
+    <div className="md:grid md:grid-cols-12  mx-auto gap-x-12 w-auto py-8 px-6  max-w-6xl">
+      <div className="col-span-full mb-4">
+        <h1 className="font-bold mb-4 text-3xl">Shopping Cart</h1>
       </div>
-    </Shell>
+      {cartItemsIsLoading || isFetching || deleteCartItemIsLoading ? (
+        <CartSkeleton />
+      ) : (
+        <>
+          <div className="md:col-span-8">
+            <CartTable columns={columns} data={carts?.cartItems || []} />
+          </div>
+
+          <div className="md:col-span-4">
+            <Summary
+              totalPrice={totalPrice || 0}
+              refetch={handleRefetchSuccess}
+            />
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

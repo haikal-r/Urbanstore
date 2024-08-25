@@ -46,8 +46,8 @@ const StorePage = () => {
           ) : stores.length > 0 ? (
             stores.map((item, index) => <StoreCard data={item} key={index} />)
           ) : (
-            <div className="col-span-full flex justify-center">
-              <p classNmae="text-center ">No results.</p>
+            <div className="col-span-full mt-4 flex justify-center">
+              <p>No results.</p>
             </div>  
           )}
         </div>

@@ -54,7 +54,7 @@ const Summary = ({ totalPrice, refetch }) => {
   }
 
   return (
-    <div className="sticky  bottom-0 md:right-0 md:top-32 z-10 mt-16 rounded-md bg-gray-100 md:px-4 md:py-6 p-3 md:col-span-5 md:mt-0 md:p-8">
+    <div className="sticky w-auto bottom-0 md:right-0 md:top-32 z-10 mt-16 rounded-md bg-gray-100 md:px-4 md:py-6 p-3 md:col-span-5 md:mt-0 md:p-8">
       <h2 className="hidden md:block text-md font-medium text-gray-900">
         Order Summary
       </h2>
