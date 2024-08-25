@@ -27,6 +27,7 @@ import toast from "react-hot-toast";
 const FormLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isSuccess ,isLoading: stateIsLoading } = useSelector((state) => state.auth);
 
   const { mutate: login, isLoading: loginIsLoading } = useLogin({
     onSuccess: async (data) => {
@@ -34,7 +35,8 @@ const FormLogin = () => {
       dispatch(getProfile());
       
       toast.success("Success Sign in");
-      navigate("/");
+      if(isSuccess) navigate("/");
+      
     },
     onError: () => {
       toast.error('Sign in failed. Please check your email and password and try again.');
@@ -49,7 +51,7 @@ const FormLogin = () => {
     },
   });
 
-  const { isLoading: stateIsLoading } = useSelector((state) => state.auth);
+
 
   const onSubmit = (data) => {
     login(data);
@@ -84,8 +86,8 @@ const FormLogin = () => {
             </FormItem>
           )}
         />
-        <Button className="mt-2" disabled={loginIsLoading && stateIsLoading}>
-          {loginIsLoading && stateIsLoading && (
+        <Button className="mt-2" disabled={loginIsLoading || stateIsLoading}>
+          {loginIsLoading || stateIsLoading && (
             <Icons.spinner
               className="mr-2 size-4 animate-spin"
               aria-hidden="true"

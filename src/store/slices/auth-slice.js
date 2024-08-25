@@ -28,13 +28,16 @@ const authSlice = createSlice({
   reducers: {
     setToken: (state, action) => {
       state.accessToken = action.payload;
+      state.isSuccess = true
     },
     setUser: (state, action) => {
       state.data = action.payload;
+      state.isSuccess = true
     },
     reset: (state) => {
       state.data = {};
       state.accessToken = null
+      state.isSuccess = false;
     },
   },
   extraReducers(builder) {
@@ -42,13 +45,17 @@ const authSlice = createSlice({
       .addCase(getProfile.pending, (state) => {
         state.isLoading = true;
         state.isError = false;
+        state.isSuccess = false;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
         state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
         state.data = action.payload;
       })
       .addCase(getProfile.rejected, (state, action) => {
         state.isLoading = false;
+        state.isSuccess = false;
         state.isError = action.error.message;
       });
   },

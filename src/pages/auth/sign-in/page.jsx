@@ -25,14 +25,15 @@ import { axiosClient, axiosPrivate } from "@/lib/axios";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() 
+  const { isSuccess, isLoading: stateIsLoading } = useSelector(state => state.auth)
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const token = params.get('token');
 
     if (token) {
-      handleToken(token);
+      handleToken(token)
     }
   }, [location]);
 
@@ -43,7 +44,7 @@ const SignInPage = () => {
       const userData = await fetchUserInfo(token);
       dispatch(setUser(userData));
       
-      navigate('/');
+      if(isSuccess) navigate('/');
     } catch (error) {
       toast.error('Login failed. Please try again.');
     } finally {
@@ -61,7 +62,6 @@ const SignInPage = () => {
 
       return response.data.data
     } catch (error) {
-      // Jika ada kesalahan, tangani di sini
       console.error('Error fetching user data:', error);
     }
   };
@@ -118,7 +118,7 @@ const SignInPage = () => {
         </div>
         <OAuthButton
           onClick={googleHandler}
-          isLoading={isLoading}
+          isLoading={isLoading || stateIsLoading}
         />
       </CardFooter>
     </Card>
