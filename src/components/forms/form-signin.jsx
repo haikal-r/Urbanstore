@@ -35,7 +35,7 @@ const FormLogin = () => {
       dispatch(getProfile());
       
       toast.success("Success Sign in");
-      if(isSuccess) navigate("/");
+      if(!stateIsLoading) navigate("/");
       
     },
     onError: () => {
