@@ -26,7 +26,7 @@ const OrderPage = () => {
   
   return (
     <DashboardLayouts>
-      {orders && (
+      {orders && orders.length >= 0 ? (
         <>
           <div className="w-full flex">
             <div className="flex flex-col gap-1">
@@ -81,16 +81,16 @@ const OrderPage = () => {
             <OrderTable columns={columns} data={orders} />
           </div>
         </>
-      )}
-      {error && (
+      ) : (
         <div className="w-full justify-center">
-          <ErrorCard
-            title="Something went wrong."
-            description="Please refresh the page or try again later."
-            retryLink="/"
-          />
-        </div>
+        <ErrorCard
+          title="Something went wrong."
+          description="Please refresh the page or try again later."
+          retryLink="/"
+        />
+      </div>
       )}
+    
     </DashboardLayouts>
   );
 };

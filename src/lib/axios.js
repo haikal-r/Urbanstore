@@ -1,7 +1,7 @@
 import { API_URL } from "@/constants/api";
 import axios from "axios";
 import { store } from "@/store";
-import { reset } from "@/store/slices/auth-slice";
+import { reset, setToken } from "@/store/slices/auth-slice";
 
 const axiosClient = axios.create({
   baseURL: API_URL ?? "http://localhost:4000",
@@ -10,11 +10,12 @@ const axiosClient = axios.create({
 
 const axiosPrivate = axios.create({
   baseURL: API_URL ?? "http://localhost:4000",
+  timeout: 5000,
 });
 
 axiosPrivate.interceptors.request.use(
   (config) => {
-    const token = store.getState().auth.accessToken
+    const token = store.getState().auth.accessToken;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -43,18 +44,11 @@ axiosPrivate.interceptors.response.use(
         const response = await axiosClient.get("/refresh-token");
 
         const newAccessToken = response.data.data;
-
-        originalConfig.headers.Authorization = `Bearer ${newAccessToken}`;
+        store.dispatch(setToken(newAccessToken));
 
         return axiosPrivate(originalConfig);
       } catch (refreshError) {
-        if (
-          refreshError.response?.status === 401 ||
-          refreshError.response?.status === 403
-        ) {
-          store.dispatch(reset());
-        }
-
+        store.dispatch(reset());
         return Promise.reject(refreshError);
       }
     }

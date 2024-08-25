@@ -12,7 +12,7 @@ import { StoreCardSkeleton } from "@/components/skeletons/store-card-skeleton";
 
 const StorePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data: stores, isLoading, isFetching, error } = useFetchStores();
+  const { data: stores = [], isLoading, isFetching, error } = useFetchStores();
 
   return (
     <DashboardLayouts>
@@ -46,14 +46,9 @@ const StorePage = () => {
           ) : stores.length > 0 ? (
             stores.map((item, index) => <StoreCard data={item} key={index} />)
           ) : (
-            <div className="col-span-full">
-              <ErrorCard
-                title="You don't have any store"
-                description="Click new button to create new store"
-                retryLink="/"
-                
-              />
-            </div>
+            <div className="col-span-full flex justify-center">
+              <p classNmae="text-center ">No results.</p>
+            </div>  
           )}
         </div>
       </>

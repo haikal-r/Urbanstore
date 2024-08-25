@@ -238,7 +238,7 @@ const CartPage = () => {
         ) : (
           <>
             <div className="md:col-span-8">
-              <CartTable columns={columns} data={carts?.cartItems} />
+              <CartTable columns={columns} data={carts?.cartItems || []} />
             </div>
             <div className="md:col-span-4">
               <Summary
