@@ -11,7 +11,6 @@ import { LayoutDashboard, LogOut, User as UserIcon } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { reset as resetAuth } from "@/store/slices/auth-slice";
-import { reset as resetCart } from "@/store/slices/cart-slice";
 
 import { axiosClient } from "@/lib/axios";
 import { getInitials } from "@/lib/utils";
@@ -27,9 +26,7 @@ const UserAccountNav = ({ user }) => {
 
     try {
       await axiosClient.post('/logout');
-      dispatch(resetCart());
       dispatch(resetAuth());
-
       navigate("/");
 
       toast.success("Logout successful.");

@@ -13,64 +13,47 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 // import react-router-dom
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import FormLogin from "@/components/forms/form-signin";
 import { navigate } from "@/lib/utils";
-import { useEffect, useState } from "react";
-import { API_URL } from "@/constants/api";
 import { setToken, setUser } from "@/store/slices/auth-slice";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import { axiosClient, axiosPrivate } from "@/lib/axios";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch() 
-  const { isSuccess, isLoading: stateIsLoading } = useSelector(state => state.auth)
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const token = params.get('token');
+  const dispatch = useDispatch();
+  const { isLoading: stateIsLoading } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (token) {
-      handleToken(token)
-    }
-  }, [location]);
+  const handleGoogleLogin = () => {
+    setIsLoading(true)
+    googleLogin()
+  }
 
-  const handleToken = async (token) => {
-    setIsLoading(true);
-    try {
-      dispatch(setToken(token));
-      const userData = await fetchUserInfo(token);
-      dispatch(setUser(userData));
+  const googleLogin = useGoogleLogin({
+    onSuccess: async ({ code }) => {
       
-      if(!stateIsLoading) navigate('/');
-    } catch (error) {
-      toast.error('Login failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const fetchUserInfo = async (token) => {
-    try {
-      const response = await axiosClient.get('/me', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+      const response = await axios.post("http://localhost:4000/auth/google", {
+        code,
       });
+      const userProfile = response.data.data.data;
+      const accessToken = response.data.data.accessToken;
+      dispatch(setToken(accessToken));
+      dispatch(setUser(userProfile));
+      setIsLoading(false);
+      toast.success("Login Success");
 
-      return response.data.data
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
-
-  const googleHandler = () => {
-    setIsLoading(true);
-    window.open(`${API_URL}/auth/google`, "_self");
-  };
-
+      navigate("/");
+    },
+    onError: (error) => {
+      setIsLoading(false);
+      toast.error('Something wrong. Please try again.')
+    },
+    flow: "auth-code",
+  });
 
   return (
     <Card className="w-full lg:w-[500px]">
@@ -117,7 +100,7 @@ const SignInPage = () => {
           </div>
         </div>
         <OAuthButton
-          onClick={googleHandler}
+          onClick={handleGoogleLogin}
           isLoading={isLoading || stateIsLoading}
         />
       </CardFooter>

@@ -12,7 +12,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
 // import react-redux
-import { getProfile, setToken } from "@/store/slices/auth-slice";
+import { getProfile, setToken, setUser } from "@/store/slices/auth-slice";
 import { useDispatch, useSelector } from "react-redux";
 
 // import react-router-dom
@@ -27,18 +27,18 @@ import toast from "react-hot-toast";
 const FormLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isSuccess ,isLoading: stateIsLoading } = useSelector((state) => state.auth);
+  const { isLoading: stateIsLoading } = useSelector((state) => state.auth);
 
   const { mutate: login, isLoading: loginIsLoading } = useLogin({
     onSuccess: async (data) => {
       dispatch(setToken(data.accessToken))
-      dispatch(getProfile());
+      dispatch(setUser(data.data));
       
       toast.success("Success Sign in");
-      if(!stateIsLoading) navigate("/");
+      navigate("/");
       
     },
-    onError: () => {
+    onError: (error) => {
       toast.error('Sign in failed. Please check your email and password and try again.');
     },
   });
