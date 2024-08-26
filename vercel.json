@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/sign-in",
+      "has": [
+        {
+          "type": "query"
+        }
+      ],
+      "permanent": false,
+      "destination": "/sign-in"
+    }
+  ]
+}

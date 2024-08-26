@@ -28,11 +28,10 @@ const SignInPage = () => {
   const dispatch = useDispatch() 
   const { isSuccess, isLoading: stateIsLoading } = useSelector(state => state.auth)
   const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const token = params.get('token');
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
-
     if (token) {
       handleToken(token)
     }
