@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 // import react-router-dom
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import FormLogin from "@/components/forms/form-signin";
 import { navigate } from "@/lib/utils";
@@ -27,6 +27,7 @@ const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch() 
   const { isSuccess, isLoading: stateIsLoading } = useSelector(state => state.auth)
+  const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -44,7 +45,7 @@ const SignInPage = () => {
       const userData = await fetchUserInfo(token);
       dispatch(setUser(userData));
       
-      if(isSuccess) navigate('/');
+      if(!stateIsLoading) navigate('/');
     } catch (error) {
       toast.error('Login failed. Please try again.');
     } finally {
