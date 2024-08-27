@@ -12,8 +12,8 @@ const DetailProductPage = () => {
   const { data: product, isLoading, isFetching } = useFetchProductByUuid(uuid);
 
   return (
-    <Shell className="pb-12 md:pb-14">
-      <div className="flex flex-col md:flex-row md:gap-16 ">
+    <Shell className="max-w-6xl items-center justify-start" variant="centered">
+      <div className="flex w-full flex-col md:flex-row md:gap-16 ">
         {isLoading || isFetching ? (
           <DetailProductSkeleton />
         ) : (
