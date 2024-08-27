@@ -42,10 +42,9 @@ axiosPrivate.interceptors.response.use(
 
       try {
         const response = await axiosClient.get("/refresh-token");
-
         const newAccessToken = response.data.data;
+        
         store.dispatch(setToken(newAccessToken));
-
         return axiosPrivate(originalConfig);
       } catch (refreshError) {
         store.dispatch(reset());

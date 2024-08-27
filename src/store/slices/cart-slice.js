@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 const initialState = {
-  data: {},
+  data: [],
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -17,24 +17,26 @@ const cartSlice = createSlice({
       state.isSuccess = true
     },
     addToCart:  (state, action) => {
+      console.log(state.data)
+      console.log(action.payload)
       const itemInCart = state.data.find(
         (item) => item.id === action.payload.id
       );
       if (itemInCart) {
-        toast.success("Item allready in cart.");
+        toast.error("Item allready in cart.");
       } else {
         state.data.push(action.payload);
         toast.success("Item added to cart");
       }
     },
     reset: (state) => {
-      state.data = {}
+      state.data = []
       state.isLoading = false
       state.isError = false
       state.isSuccess = false
     },
     removeItem: (state, action) => {
-      state.data = state.data.filter((item) => item.id !== action.payload);
+      state.data = state.data.filter((item) => item.id !== action.payload.id);
       toast.success("Item removed from the cart");
     },
   },

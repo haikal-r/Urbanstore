@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Icons } from "@/components/atoms/icons";
 import { Input } from "@/components/ui/input";
+import { addToCart } from "@/store/slices/cart-slice";
 
 const AddToCart = ({ data }) => {
   const id = useId();
@@ -28,13 +29,11 @@ const AddToCart = ({ data }) => {
   const [isBuyingNow, setIsBuyingNow] = useState(false);
   const { refetch: refetchCartItem } = useFetchCartItems();
   const { mutate: createCartItem } = useCreateCartItem({
-    onSuccess: (response) => {
-      toast.success(response.message)
+    onSuccess: () => {
       refetchCartItem();
-      
     },
     onError: (error) => {
-      toast.error(error.response.data.message)
+      console.error(error.response.data.message)
     },
   });
 
@@ -45,16 +44,23 @@ const AddToCart = ({ data }) => {
     },
   });
 
+  const newData = {
+    id: data.id,
+    quantity: form.getValues("quantity"), 
+  };
+
   const handleAddToCart = () => {
     setIsAddingToCart(true);
 
+    
     createCartItem({
       productId: data.id,
       storeId: data.productId,
       quantity: form.getValues("quantity"),
     });
+
     setIsAddingToCart(false);
-    navigate("/cart");
+    dispatch(addToCart(newData))
     
   };
 
@@ -67,6 +73,7 @@ const AddToCart = ({ data }) => {
       quantity: form.getValues("quantity"),
     })
 
+    dispatch(addToCart(newData))
     setIsBuyingNow(false);
     navigate("/cart");
 

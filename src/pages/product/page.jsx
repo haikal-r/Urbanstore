@@ -15,6 +15,7 @@ const ProductPage = () => {
   });
 
   const { item } = useParams();
+  console.log(item);
 
   const {
     data,
@@ -22,10 +23,11 @@ const ProductPage = () => {
     fetchNextPage,
     hasNextPage,
     isFetching,
+    isLoading,
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["infinite-query"],
+    queryKey: ["infinite-query", item],
     queryFn: async ({ pageParam = 1 }) => {
       if (item) {
         const { data } = await axiosClient.get(
@@ -95,9 +97,8 @@ const ProductPage = () => {
             )}
           </React.Fragment>
         ))}
-        {isFetching ||
-          (isFetchingNextPage &&
-            Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />))}
+        {isFetching || isLoading || isFetchingNextPage &&
+            Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)}
       </div>
     </Shell>
   );

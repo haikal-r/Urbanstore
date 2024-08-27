@@ -9,13 +9,15 @@ import { Shell } from "@/components/ui/shell";
 import { useDeleteCartItem } from "@/features/cart/use-delete-cart";
 import { useFetchCartItems } from "@/features/cart/use-fetch-cart";
 import { formatPriceIDR, navigate } from "@/lib/utils";
+import { removeItem } from "@/store/slices/cart-slice";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CartPage = () => {
   const [selectedPrices, setSelectedPrices] = useState([]);
+  const dispatch = useDispatch()
 
   const user = useSelector((state) => state.auth.data.email);
 
@@ -103,6 +105,7 @@ const CartPage = () => {
       header: () => <div className="text-left">Product</div>,
       cell: ({ row }) => {
         const onRemove = (id) => {
+          dispatch(removeItem(row.original))
           deleteCartItem({ productId: id });
         };
         return (
@@ -130,7 +133,7 @@ const CartPage = () => {
             <div className="flex flex-col items-start gap-2">
               <p>{row.original.name}</p>
               <button
-                onClick={() => onRemove(row.original.id)}
+                onClick={() => onRemove(row.original.productId)}
                 className="hover:underline text-[13px]"
               >
                 Remove
@@ -216,7 +219,6 @@ const CartPage = () => {
     useDeleteCartItem({
       onSuccess: (response) => {
         refetchCartItems();
-        toast.success(response.data.message);
       },
     });
 

@@ -71,7 +71,6 @@ export function AddProductForm() {
       navigate(`/dashboard/stores/${slug}`)
       
     } catch (error) {
-      console.error(error);
       toast.error("Something wrong. Please try again...");
     } finally {
       setIsLoading(false);
