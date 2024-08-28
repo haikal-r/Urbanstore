@@ -23,6 +23,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { fetchCart } from "@/store/slices/cart-slice";
+import { API_URL } from "../../../constants/api";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +38,7 @@ const SignInPage = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
       
-      const { data } = await axios.post("http://localhost:4000/auth/google", {
+      const { data } = await axios.post(`${API_URL}/auth/google`, {
         code,
       });
 

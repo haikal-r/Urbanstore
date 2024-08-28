@@ -19,40 +19,46 @@ import { fetchUserInfo } from "@/services/auth.service";
 import { setToken, setUser } from "@/store/slices/auth-slice";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
 
 const SignUpPage = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { isLoading: stateIsLoading } = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const token = params.get('token');
+  const handleGoogleLogin = () => {
+    setIsLoading(true)
+    googleLogin()
+  }
 
-    if (token) {
-      handleToken(token);
-    }
-  }, [location]);
-
-  const handleToken = async (token) => {
-    setIsLoading(true);
-    try {
-      dispatch(setToken(token));
-      const userData = await fetchUserInfo(token);
-      dispatch(setUser(userData));
+  const googleLogin = useGoogleLogin({
+    onSuccess: async ({ code }) => {
       
-      navigate('/');
-    } catch (error) {
-      toast.error('Login failed. Please try again.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+      const { data } = await axios.post(`${API_URL}/auth/google`, {
+        code,
+      });
 
-  const googleHandler = () => {
-    setIsLoading(true);
-    window.open(`${API_URL}/auth/google`, "_self");
-  };
+      const { data: userProfile } = data.data;
+      const token = {
+        accessToken:  data.data.accessToken,
+        refreshToken:  data.data.refreshToken,
+      }
+
+      dispatch(setToken(token));
+      dispatch(setUser(userProfile));
+      setIsLoading(false);
+      toast.success("Login Success");
+
+      navigate("/");
+    },
+    onError: () => {
+      setIsLoading(false);
+      toast.error('Something wrong. Please try again.')
+    },
+    flow: "auth-code",
+  });
 
   return (
     <Card className="w-full lg:w-[500px]">
@@ -87,7 +93,7 @@ const SignUpPage = () => {
             </span>
           </div>
         </div>
-        <OAuthButton onClick={googleHandler} isLoading={isLoading} />
+        <OAuthButton onClick={handleGoogleLogin} isLoading={isLoading || stateIsLoading} />
       </CardFooter>
     </Card>
   );
