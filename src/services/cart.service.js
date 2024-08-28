@@ -18,7 +18,7 @@ export const updateCartItem = async () => {
 
     return response 
   } catch (error) {
-    console.error(error.message)
+    throw error
   }
 }
 
@@ -28,7 +28,7 @@ export const postCartItem = async () => {
 
     return response
   } catch (error) {
-    console.error(error)
+    throw error
   }
 }
 
@@ -38,6 +38,6 @@ export const deleteCartItem = async () => {
 
     return response
   } catch (error) {
-    console.error(error)
+    throw error
   }
 }

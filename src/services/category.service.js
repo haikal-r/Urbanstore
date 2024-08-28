@@ -6,6 +6,6 @@ export const getCategoryResponse = async (resource) => {
 
     return response;
   } catch (err) {
-    console.error(err.message);
+    throw error
   }
 };

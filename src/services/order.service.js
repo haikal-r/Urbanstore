@@ -10,7 +10,7 @@ export const getOrderItem = async (status) => {
 
     return response;
   } catch (error) {
-    console.error(error);
+    throw error
   }
 };
 
@@ -20,7 +20,7 @@ export const updateOrderItem = async () => {
 
     return response;
   } catch (error) {
-    console.error(error.message);
+    throw error
   }
 };
 
@@ -30,7 +30,7 @@ export const postOrderItem = async () => {
 
     return response;
   } catch (error) {
-    console.error(error);
+    throw error
   }
 };
 
@@ -40,6 +40,6 @@ export const deleteOrderItem = async () => {
 
     return response;
   } catch (error) {
-    console.error(error);
+    throw error
   }
 };

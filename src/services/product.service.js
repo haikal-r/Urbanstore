@@ -7,7 +7,7 @@ export const getAllProducts = async (query) => {
     
     return response.data  
   } catch (error) {
-    console.error(error.message);
+    throw error
   }
 };
 
@@ -17,6 +17,6 @@ export const getProductByUuid = async (uuid) => {
 
     return response
   } catch (error) {
-    console.error(error.message)
+    throw error
   }
 }

@@ -15,7 +15,6 @@ const ProductPage = () => {
   });
 
   const { item } = useParams();
-  console.log(item);
 
   const {
     data,
