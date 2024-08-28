@@ -31,7 +31,11 @@ const FormLogin = () => {
 
   const { mutate: login, isLoading: loginIsLoading } = useLogin({
     onSuccess: async (data) => {
-      dispatch(setToken(data.accessToken))
+      const token = {
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+      }
+      dispatch(setToken(token))
       dispatch(setUser(data.data));
       
       toast.success("Success Sign in");

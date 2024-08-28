@@ -36,19 +36,24 @@ const SignInPage = () => {
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
       
-      const response = await axios.post("http://localhost:4000/auth/google", {
+      const { data } = await axios.post("http://localhost:4000/auth/google", {
         code,
       });
-      const userProfile = response.data.data.data;
-      const accessToken = response.data.data.accessToken;
-      dispatch(setToken(accessToken));
+
+      const { data: userProfile } = data.data;
+      const token = {
+        accessToken:  data.data.accessToken,
+        refreshToken:  data.data.refreshToken,
+      }
+
+      dispatch(setToken(token));
       dispatch(setUser(userProfile));
       setIsLoading(false);
       toast.success("Login Success");
 
       navigate("/");
     },
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
       toast.error('Something wrong. Please try again.')
     },

@@ -15,7 +15,7 @@ const axiosPrivate = axios.create({
 
 axiosPrivate.interceptors.request.use(
   (config) => {
-    const token = store.getState().auth.accessToken;
+    const token = store.getState().auth.token.accessToken;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -41,10 +41,16 @@ axiosPrivate.interceptors.response.use(
       );
 
       try {
-        const response = await axiosClient.get("/refresh-token");
-        const newAccessToken = response.data.data;
+        const response = await axiosClient.get("/refresh-token", {
+          refreshToken: store.getState().auth.token.refreshToken,
+        });
         
-        store.dispatch(setToken(newAccessToken));
+        const token = {
+          refreshToken: store.getState().auth.token.refreshToken,
+          accessToken: response.data.data.accessToken
+        }
+
+        store.dispatch(setToken(token));
         return axiosPrivate(originalConfig);
       } catch (refreshError) {
         store.dispatch(reset());
