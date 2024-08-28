@@ -6,9 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Shell } from "@/components/ui/shell";
 import { useFetchProducts } from "@/features/product/use-fetch-products";
 import { useFetchCategories } from "@/features/use-fetch-category";
-import { navigate } from "@/lib/utils";
-import { getProfile } from "@/store/slices/auth-slice";
-import Cookies from "js-cookie";
+import { fetchCart } from "@/store/slices/cart-slice";
 import { ChevronsRight } from "lucide-react";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -26,6 +24,12 @@ export default function MainPage() {
     isLoading: productIsLoading,
     isFetching: productIsFetching,
   } = useFetchProducts();
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCart())
+  }, [dispatch])
 
   return (
     <Shell className="max-w-6xl gap-0 ">
@@ -53,10 +57,10 @@ export default function MainPage() {
 
       <section className="pb-10">
         <div className="flex flex-col gap-2 mb-7">
-          <h1 className="font-heading text-3xl font-semibold tracking-tight leading-[1] md:text-4xl">
+          <h1 className="font-heading  font-semibold tracking-tight leading-[1]  text-2xl md:text-4xl">
             Featured Categories
           </h1>
-          <p className="text-muted-foreground sm:text-xl">
+          <p className="text-muted-foreground text-sm md:text-lg">
             Explore categories from around the world
           </p>
         </div>
@@ -74,11 +78,11 @@ export default function MainPage() {
 
       <section className="py-8">
         <div className="flex flex-col gap-2 mb-7">
-          <h1 className="font-heading text-3xl font-semibold tracking-tight leading-[1] md:text-4xl">
+          <h1 className="font-heading font-semibold tracking-tight leading-[1] text-2xl md:text-4xl">
             Popular Products
           </h1>
           <div className="flex justify-between">
-            <p className="text-muted-foreground sm:text-xl">
+            <p className="text-muted-foreground text-sm md:text-lg">
               Explore products from around the world
             </p>
 

@@ -33,7 +33,7 @@ const AddToCart = ({ data }) => {
       refetchCartItem();
     },
     onError: (error) => {
-      console.error(error.response.data.message)
+      toast.error("Something wrong please try again")
     },
   });
 

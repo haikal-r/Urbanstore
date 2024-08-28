@@ -11,8 +11,10 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useFetchOrders } from "@/features/order/use-fetch-order";
 import { ChevronDownIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DashboardLayouts from "../layout";
+import { useDispatch } from "react-redux";
+import { fetchCart } from "@/store/slices/cart-slice";
 
 const OrderPage = () => {
   const [statuses, setStatuses] = useState({
@@ -20,6 +22,13 @@ const OrderPage = () => {
     pending: false,
     canceled: false,
   });
+
+  
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCart())
+  }, [dispatch])
 
   const status = Object.keys(statuses).find((key) => statuses[key] === true);
   const { data: orders = [], isLoading, error } = useFetchOrders(status);

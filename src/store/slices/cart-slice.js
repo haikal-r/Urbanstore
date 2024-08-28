@@ -1,5 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { axiosPrivate } from "@/lib/axios";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+
+export const fetchCart = createAsyncThunk("cart/fetchCart", async () => {
+  const { data } = await axiosPrivate.get("/api/v1/carts");
+  const cartItems = data.data.data.cartItems.map((item) => ({
+    id: item.productId,
+    quantity: item.quantity,
+  }));
+
+  return cartItems;
+});
 
 const initialState = {
   data: [],
@@ -14,11 +25,9 @@ const cartSlice = createSlice({
   reducers: {
     setItem: (state, action) => {
       state.data = action.payload;
-      state.isSuccess = true
+      state.isSuccess = true;
     },
-    addToCart:  (state, action) => {
-      console.log(state.data)
-      console.log(action.payload)
+    addToCart: (state, action) => {
       const itemInCart = state.data.find(
         (item) => item.id === action.payload.id
       );
@@ -30,15 +39,23 @@ const cartSlice = createSlice({
       }
     },
     reset: (state) => {
-      state.data = []
-      state.isLoading = false
-      state.isError = false
-      state.isSuccess = false
+      state.data = [];
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
     },
     removeItem: (state, action) => {
-      state.data = state.data.filter((item) => item.id !== action.payload.id);
+      state.data = state.data.filter((item) => item.id !== action.payload.productId);
       toast.success("Item removed from the cart");
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchCart.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.isSuccess = true;
+      state.isLoading = false;
+      state.isError = false;
+    });
   },
 });
 

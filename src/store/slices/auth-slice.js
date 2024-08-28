@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   data: {},
-  accessToken: null,
+  token: {},
   isLoading: false,
   isError: false,
   isSuccess: false,
@@ -27,7 +27,7 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setToken: (state, action) => {
-      state.accessToken = action.payload;
+      state.token = action.payload;
       state.isSuccess = true
     },
     setUser: (state, action) => {
@@ -36,7 +36,7 @@ const authSlice = createSlice({
     },
     reset: (state) => {
       state.data = {};
-      state.accessToken = null;
+      state.token = {};
       state.isSuccess = true;
     },
   },

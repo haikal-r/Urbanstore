@@ -22,6 +22,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { fetchCart } from "@/store/slices/cart-slice";
 
 const SignInPage = () => {
   const [isLoading, setIsLoading] = useState(false);
