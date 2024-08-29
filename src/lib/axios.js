@@ -1,7 +1,8 @@
 import { API_URL } from "@/constants/api";
 import axios from "axios";
-import { store } from "@/store";
 import { reset, setToken } from "@/store/slices/auth-slice";
+import { reset as resetCart } from "@/store/slices/cart-slice";
+import { store } from "@/store";
 
 const axiosClient = axios.create({
   baseURL: API_URL ?? "http://localhost:4000",
@@ -41,19 +42,21 @@ axiosPrivate.interceptors.response.use(
       );
 
       try {
-        const response = await axiosClient.get("/refresh-token", {
+        const response = await axiosClient.post("/refresh-token", {
           refreshToken: store.getState().auth.token.refreshToken,
         });
-        
+
+
         const token = {
           refreshToken: store.getState().auth.token.refreshToken,
-          accessToken: response.data.data.accessToken
+          accessToken: response.data.data
         }
 
         store.dispatch(setToken(token));
         return axiosPrivate(originalConfig);
       } catch (refreshError) {
         store.dispatch(reset());
+        store.dispatch(resetCart())
         return Promise.reject(refreshError);
       }
     }
