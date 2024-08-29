@@ -5,14 +5,12 @@ import CartTable from "@/components/tables/cart/table";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
-import { Shell } from "@/components/ui/shell";
 import { useDeleteCartItem } from "@/features/cart/use-delete-cart";
 import { useFetchCartItems } from "@/features/cart/use-fetch-cart";
 import { formatPriceIDR, navigate } from "@/lib/utils";
-import { removeItem } from "@/store/slices/cart-slice";
+import { fetchCart, removeItem } from "@/store/slices/cart-slice";
 import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const CartPage = () => {
@@ -20,8 +18,11 @@ const CartPage = () => {
   const dispatch = useDispatch()
 
   const user = useSelector((state) => state.auth.data.email);
-
   if (!user) return navigate("/sign-in");
+
+  useEffect(() => {
+    dispatch(fetchCart())
+  }, [dispatch])
 
   const columns = [
     {

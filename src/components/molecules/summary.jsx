@@ -29,9 +29,11 @@ const Summary = ({ totalPrice, refetch }) => {
           },
         });
       }
+      setIsLoading(false)
     },
     onError: (error) => {
       toast.error(error.response.data.message);
+      setIsLoading(false)
     },
   });
 
