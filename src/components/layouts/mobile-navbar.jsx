@@ -50,6 +50,12 @@ const MobileNavbar = () => {
                       >
                         Stores
                       </Link>
+                      <Link
+                        onClick={handleOnClick}
+                        to="/dashboard/orders"
+                      >
+                        Orders
+                      </Link>
                     </div>
                   </AccordionContent>
                 </AccordionItem>

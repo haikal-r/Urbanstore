@@ -5,30 +5,12 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Icons } from "../atoms/icons";
 
-const Summary = ({ totalPrice, refetch }) => {
+const Summary = ({ totalPrice }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [token, setToken] = useState('')
   const { mutate: createOrderItem } = useCreateOrderItem({
-    onSuccess: (response) => {
-      refetch();
-      if (response.data.data.token) {
-        window.snap.pay(response.data.data.token, {
-          onSuccess: () => {
-            navigate("/dashboard/orders");
-            toast.success("Payment success!");
-          },
-          onPending: () => {
-            navigate("/dashboard/orders");
-            toast("Waiting your payment..");
-          },
-          onError: () => {
-            toast.error("Payment failed, something went wrong");
-          },
-          onClose: () => {
-            navigate("/dashboard/orders");
-            toast.error("You have not completed the payment.");
-          },
-        });
-      }
+    onSuccess: (data) => {
+      setToken(data.token)
       setIsLoading(false)
     },
     onError: (error) => {
@@ -37,15 +19,35 @@ const Summary = ({ totalPrice, refetch }) => {
     },
   });
 
+
+  useEffect(() => {
+    if (token) {
+      window.snap.pay(token, {
+        onSuccess: () => {
+          navigate("/dashboard/orders");
+          toast.success("Payment success!");
+        },
+        onPending: () => {
+          navigate("/dashboard/orders");
+          toast("Waiting your payment..");
+        },
+        onError: () => {
+          toast.error("Payment failed, something went wrong");
+        },
+        onClose: () => {
+          navigate("/dashboard/orders");
+          toast.error("You have not completed the payment.");
+        },
+      });
+    }
+  }, [token])
+
   useEffect(() => {
     const midtransUrl = "https://app.sandbox.midtrans.com/snap/snap.js";
 
     let scriptTag = document.createElement("script");
     scriptTag.src = midtransUrl;
-    scriptTag.setAttribute(
-      "data-client-key",
-      import.meta.env.VITE_MIDTRANS_CLIENT_KEY
-    );
+    scriptTag.setAttribute("data-client-key", import.meta.env.VITE_MIDTRANS_CLIENT_KEY);
 
     document.body.appendChild(scriptTag);
 

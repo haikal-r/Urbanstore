@@ -4,7 +4,10 @@ import { useMutation } from "@tanstack/react-query";
 export const useCreateOrderItem = ({ onSuccess, onError }) => {
   return useMutation({
     mutationFn: async () => {
-      return await axiosPrivate.post("/api/v1/orders");
+      const response = await axiosPrivate.post("/api/v1/orders");
+      const { data } = response
+
+      return data?.data
     },
     mutationKey: ["create.orderItem"],
     onSuccess,

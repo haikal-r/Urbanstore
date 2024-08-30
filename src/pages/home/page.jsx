@@ -23,7 +23,7 @@ export default function MainPage() {
     data: products,
     isLoading: productIsLoading,
     isFetching: productIsFetching,
-  } = useFetchProducts();
+  } = useFetchProducts("limit=4");
 
   const dispatch = useDispatch()
 
@@ -103,6 +103,12 @@ export default function MainPage() {
             ))
           )}
         </div>
+        <Link
+              to="/products"
+              className="flex justify-center md:hidden gap-1  hover:translate-x-1 transition-all me-3"
+            >
+              View all products <ChevronsRight />
+            </Link>
       </section>
     </Shell>
   );

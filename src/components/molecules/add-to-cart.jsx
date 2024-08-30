@@ -15,7 +15,7 @@ import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Icons } from "@/components/atoms/icons";
 import { Input } from "@/components/ui/input";
@@ -33,7 +33,7 @@ const AddToCart = ({ data }) => {
       refetchCartItem();
     },
     onError: (error) => {
-      toast.error("Something wrong please try again")
+      console.error("Something wrong please try again");
     },
   });
 
@@ -44,39 +44,45 @@ const AddToCart = ({ data }) => {
     },
   });
 
+  const user = useSelector((state) => state.auth.data.email);
+
   const newData = {
     id: data.id,
-    quantity: form.getValues("quantity"), 
+    quantity: form.getValues("quantity"),
   };
 
   const handleAddToCart = () => {
     setIsAddingToCart(true);
 
-    
-    createCartItem({
-      productId: data.id,
-      storeId: data.productId,
-      quantity: form.getValues("quantity"),
-    });
-
-    setIsAddingToCart(false);
-    dispatch(addToCart(newData))
-    
+    if (user) {
+      createCartItem({
+        productId: data.id,
+        storeId: data.productId,
+        quantity: form.getValues("quantity"),
+      });
+      dispatch(addToCart(newData));
+      setIsAddingToCart(false);
+    } else {
+      navigate("/sign-in");
+    }
   };
 
   const handleBuyingNow = () => {
     setIsBuyingNow(true);
 
-    createCartItem({
-      productId: data.id,
-      storeId: data.productId,
-      quantity: form.getValues("quantity"),
-    })
+    if (user) {
+      createCartItem({
+        productId: data.id,
+        storeId: data.productId,
+        quantity: form.getValues("quantity"),
+      });
 
-    dispatch(addToCart(newData))
-    setIsBuyingNow(false);
-    navigate("/cart");
-
+      dispatch(addToCart(newData));
+      setIsBuyingNow(false);
+      navigate("/cart");
+    } else {
+      navigate("/sign-in");
+    }
   };
 
   return (

@@ -5,6 +5,8 @@ import { Separator } from "../ui/separator";
 import { StoreTabs } from "../pagers/store-tabs";
 import { ErrorCard } from "../cards/error-card";
 import { useEffect } from "react";
+import { Skeleton } from "../ui/skeleton";
+import { Icons } from "../atoms/icons";
 
 const StoreLayouts = ({ children, title, description }) => {
   const { slug } = useParams();
@@ -12,7 +14,6 @@ const StoreLayouts = ({ children, title, description }) => {
     data: store,
     isLoading,
     isFetching,
-    error,
   } = useFetchStoreByParam(slug);
   const navigate = useNavigate();
 
@@ -40,11 +41,12 @@ const StoreLayouts = ({ children, title, description }) => {
           </div>
         </>
       ) : (
-        <ErrorCard
-          title="Something went wrong."
-          description="Please refresh the page or try again later."
-          retryLink="/"
-        />
+        <div className="h-full flex justify-center items-center">
+          <Icons.spinner
+            className="mr-2 size-10 animate-spin"
+            aria-hidden="true"
+          />
+        </div>
       )}
     </DashboardLayouts>
   );

@@ -10,14 +10,24 @@ import {
 // import { getRandomPatternStyle } from '@/lib/generate-pattern'
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { Icons } from "../atoms/icons";
 
 const StoreCard = ({ data }) => {
   return (
     <Link to={`/dashboard/stores/${data.slug}`}>
       <Card className="h-full overflow-hidden">
         <AspectRatio ratio={21 / 9}>
-          <div className="absolute inset-0 bg-gradient-to-t from-transparent to-zinc-950/50" />
-          <div className="h-full rounded-t-md border-b" />
+          <div
+            aria-label="Product Placeholder"
+            role="img"
+            aria-roledescription="placeholder"
+            className="flex aspect-square size-full flex-1 items-center justify-center bg-secondary"
+          >
+            <Icons.placeholder
+              className="size-9 text-muted-foreground"
+              aria-hidden="true"
+            />
+          </div>
         </AspectRatio>
         <CardHeader>
           <CardTitle className="line-clamp-1 text-lg">{data.name}</CardTitle>
@@ -25,7 +35,7 @@ const StoreCard = ({ data }) => {
             {data.description}
           </CardDescription>
         </CardHeader>
-        <CardContent >
+        <CardContent>
           <p
             className={cn(
               buttonVariants({

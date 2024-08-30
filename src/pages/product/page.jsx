@@ -96,8 +96,9 @@ const ProductPage = () => {
             )}
           </React.Fragment>
         ))}
-        {isFetching || isLoading || isFetchingNextPage &&
-            Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)}
+        {isFetching || isLoading || isFetchingNextPage
+          ? Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)
+          : null}
       </div>
     </Shell>
   );

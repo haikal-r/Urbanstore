@@ -15,14 +15,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 const CartPage = () => {
   const [selectedPrices, setSelectedPrices] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.data.email);
   if (!user) return navigate("/sign-in");
 
   useEffect(() => {
-    dispatch(fetchCart())
-  }, [dispatch])
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   const columns = [
     {
@@ -106,7 +106,7 @@ const CartPage = () => {
       header: () => <div className="text-left">Product</div>,
       cell: ({ row }) => {
         const onRemove = (id) => {
-          dispatch(removeItem(row.original))
+          dispatch(removeItem(row.original));
           deleteCartItem({ productId: id });
         };
         return (
@@ -227,10 +227,6 @@ const CartPage = () => {
     selectedPrices.length >= 1
       ? selectedPrices.reduce((acc, curr) => acc + curr, 0)
       : selectedPrices[0];
-  const handleRefetchSuccess = () => {
-    setSelectedPrices(totalPrice);
-    refetchCartItems();
-  };
 
   return (
     <div className="md:grid md:grid-cols-12  mx-auto gap-x-12 w-auto py-8 px-6  max-w-6xl">
@@ -246,10 +242,7 @@ const CartPage = () => {
           </div>
 
           <div className="md:col-span-4">
-            <Summary
-              totalPrice={totalPrice || 0}
-              refetch={handleRefetchSuccess}
-            />
+            <Summary totalPrice={totalPrice || 0} />
           </div>
         </>
       )}
