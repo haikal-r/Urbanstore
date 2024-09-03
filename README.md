@@ -23,5 +23,3 @@ An open source e-commerce project built by [haikal-r](https://github.com/haikal-
 
 - For the ReactJS application, I deploy it on [Vercel](https://vercel.com/)
 - And for the PostgreSQL database I deploy it on [Supabase](https://supabase.com/)
-
-s
