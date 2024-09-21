@@ -1,3 +1,4 @@
+import { Icons } from "@/components/atoms/icons";
 import ProductCard from "@/components/cards/card-product";
 import { ErrorCard } from "@/components/cards/error-card";
 import { Shell } from "@/components/ui/shell";
@@ -28,15 +29,12 @@ const ProductPage = () => {
   } = useInfiniteQuery({
     queryKey: ["infinite-query", item],
     queryFn: async ({ pageParam = 1 }) => {
-      if (item) {
-        const { data } = await axiosClient.get(
-          `/api/v1/products/category/${item}?limit=4&page=${pageParam}`
-        );
-        return data;
-      }
       const { data } = await axiosClient.get(
-        `/api/v1/products?limit=4&page=${pageParam}`
+        item
+          ? `/api/v1/products/category/${item}?limit=4&page=${pageParam}`
+          : `/api/v1/products?limit=4&page=${pageParam}`
       );
+
       return data;
     },
     initialPageParam: 1,
@@ -67,38 +65,32 @@ const ProductPage = () => {
     );
   }
 
+  const products = data?.pages?.flatMap((page) => page.data.data) || [];
+  const isLoadingOrFetching = isFetching || isLoading || isFetchingNextPage;
+
   return (
     <Shell className="max-w-6xl gap-0">
       <div className="grid grid-cols-2 gap-2 md:gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {data?.pages?.map((page, i) => (
-          <React.Fragment key={i}>
-            {page.data.data.length > 0 ? (
-              page.data.data.map((product, index) => (
-                <ProductCard
-                  key={index}
-                  ref={
-                    i === data.pages.length - 1 &&
-                    index === page.data.data.length - 1
-                      ? lastAnimeRef
-                      : null
-                  }
-                  product={product}
-                />
-              ))
-            ) : (
+        {products.length > 0
+          ? products.map((product, index) => (
+              <ProductCard
+                key={index}
+                ref={index === products.length - 1 ? lastAnimeRef : null}
+                product={product}
+              />
+            ))
+          : !isLoadingOrFetching && (
               <div className="col-span-full">
                 <ErrorCard
                   title="Product not found"
-                  description="Product not found. Try checking other categories or searching again."
+                  description="No products found. Try checking other categories or searching again."
                   retryLink="/"
                 />
               </div>
             )}
-          </React.Fragment>
-        ))}
-        {isFetching || isLoading || isFetchingNextPage
-          ? Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)
-          : null}
+
+        {isLoadingOrFetching &&
+          Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)}
       </div>
     </Shell>
   );
